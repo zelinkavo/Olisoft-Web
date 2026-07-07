@@ -1,0 +1,4 @@
+# Cloudflare Worker configuration — Portfolio Senior 2026
+# The Astro Cloudflare adapter handles the worker entry point automatically
+name = "davidoliver-ai"
+compatibility_date = "2026-04-01"

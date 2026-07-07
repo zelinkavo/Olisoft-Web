@@ -1,0 +1,72 @@
+---
+/**
+ * Badge.astro — Pill badge component
+ *
+ * Color variants by cluster: ai (gold), dev (steel), infra (teal)
+ */
+interface Props {
+  variant?: 'default' | 'ai' | 'dev' | 'infra' | 'success';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { variant = 'default', size = 'md', class: className } = Astro.props;
+---
+
+<span class:list={['badge', `badge--${variant}`, `badge--${size}`, className]}>
+  <slot />
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .badge--sm {
+    font-size: 0.65rem;
+    padding: 2px var(--space-sm);
+  }
+
+  .badge--md {
+    font-size: 0.75rem;
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  /* Variants — New warm palette */
+  .badge--default {
+    color: var(--color-text-muted);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .badge--ai {
+    color: #e8c47a;
+    background: rgba(212, 162, 78, 0.10);
+    border: 1px solid rgba(212, 162, 78, 0.22);
+  }
+
+  .badge--dev {
+    color: #a3b5d6;
+    background: rgba(124, 149, 196, 0.10);
+    border: 1px solid rgba(124, 149, 196, 0.22);
+  }
+
+  .badge--infra {
+    color: #7dd4c4;
+    background: rgba(91, 184, 166, 0.10);
+    border: 1px solid rgba(91, 184, 166, 0.22);
+  }
+
+  .badge--success {
+    color: #86efac;
+    background: rgba(34, 197, 94, 0.10);
+    border: 1px solid rgba(34, 197, 94, 0.22);
+  }
+</style>

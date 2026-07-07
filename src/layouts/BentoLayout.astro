@@ -1,0 +1,37 @@
+---
+/**
+ * BentoLayout.astro — Content sections container
+ *
+ * Single-column stacked layout for portfolio sections.
+ * Each section gets full width for maximum readability.
+ * Hero is rendered full-bleed OUTSIDE this container.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['content-sections', className]}>
+  <slot name="projects" />
+  <slot name="skills" />
+  <slot name="experience" />
+  <slot name="contact" />
+</div>
+
+<style>
+  .content-sections {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 640px) {
+    .content-sections {
+      padding: 0 var(--space-md);
+    }
+  }
+</style>

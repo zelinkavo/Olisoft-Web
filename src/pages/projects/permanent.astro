@@ -1,0 +1,166 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Badge from '../../components/ui/Badge.astro';
+import ProjectTimelineItem from '../../components/ProjectTimelineItem.astro';
+---
+
+<CaseStudyLayout
+  title="Permanent — Game Engineering & UE5 Architecture"
+  description="Arquitectura y desarrollo técnico de un videojuego 3D complejo, abarcando desde sistemas de IA hasta pipelines de optimización en Unreal Engine 5."
+  clusters={['development']}
+  projectContext="Game Engineering Project — Solo Dev"
+  technologies={['Unreal Engine 5', 'C++', 'Blueprints Visual Scripting', 'Behavior Trees & EQS', 'Nanite & Lumen', 'Profiling & Optimization']}
+>
+  <ProjectTimelineItem title="El Reto" isOpen={true}>
+    <p>
+      El desafío principal consistió en orquestar el desarrollo íntegro de un título 3D de alta fidelidad, actuando como arquitecto de sistemas, programador y diseñador de niveles. El objetivo técnico fue crear una <strong>experiencia sistémica</strong> donde todas las mecánicas (interacción, IA, narrativa técnica) estuvieran desacopladas y fueran escalables, manteniendo un rendimiento estable de 60 FPS en hardware de gama media bajo la exigente pipeline de Unreal Engine 5.
+    </p>
+    <div class="callout">
+      <strong>Core Engineering:</strong> Implementación de una arquitectura modular que permita iterar sobre la lógica de juego sin incurrir en deuda técnica, gestionando estados complejos del jugador de forma determinista.
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="La Solución">
+    <p>
+      Se optó por un enfoque de desarrollo híbrido, priorizando el rendimiento mediante núcleos de sistema en C++ y la flexibilidad mediante Blueprints para la capa de gameplay.
+    </p>
+    
+    <h3>Arquitectura de Sistemas</h3>
+    <ul>
+      <li><strong>Hybrid Scripting Engine:</strong> Desarrollo de clases base en C++ para gestionar sistemas críticos (atributos, inventario, movimiento básico) expuestos a Blueprints para la implementación rápida de lógica de diseño.</li>
+      <li><strong>IA Predictiva y Reactiva:</strong> Orquestación de enemigos mediante <strong>Behavior Trees</strong> y el <strong>Environment Query System (EQS)</strong> de UE, permitiendo que las entidades naveguen de forma inteligente y tomen decisiones basadas en el contexto táctico del entorno.</li>
+      <li><strong>Technical Level Design:</strong> Pipeline de diseño de niveles desde el bloquing técnico hasta el pulido final, integrando <strong>Nanite</strong> para la gestión de geometría de alta densidad y <strong>Lumen</strong> para iluminación global dinámica en tiempo real.</li>
+      <li><strong>Post-Processing & Shaders:</strong> Creación de materiales dinámicos y shaders personalizados para comunicar estados del juego directamente a través del renderizado, optimizando draw calls y memoria de texturas.</li>
+    </ul>
+
+    <!-- Technical Systems Showcase -->
+    <div class="game-systems" data-animate="fade-up">
+      <div class="game-systems__grid">
+        <div class="game-systems__card">
+          <span class="game-systems__icon">💻</span>
+          <h4>C++ Core Systems</h4>
+          <p>Clases base optimizadas para la gestión de atributos y estados físicos del personaje.</p>
+        </div>
+        <div class="game-systems__card">
+          <span class="game-systems__icon">🤖</span>
+          <h4>AI Architecture</h4>
+          <p>Uso de Blackboard y EQS para dotar a los enemigos de conciencia espacial dinámica.</p>
+        </div>
+        <div class="game-systems__card">
+          <span class="game-systems__icon">📐</span>
+          <h4>Modular Level Design</h4>
+          <p>Construcción basada en prototipado técnico (Whiteboxing) y kits de assets optimizados.</p>
+        </div>
+        <div class="game-systems__card">
+          <span class="game-systems__icon">⚡</span>
+          <h4>Perf. Profiling</h4>
+          <p>Uso de Unreal Insights y GPU Profiler para identificar y mitigar cuellos de botella.</p>
+        </div>
+      </div>
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="Resultados">
+    <p>
+      Una vertical slice que demuestra la capacidad de liderar un desarrollo 3D completo bajo estándares profesionales de la industria (GameDev AA/AAA).
+    </p>
+    <ul>
+      <li><strong>Eficiencia Técnica:</strong> Optimización de recursos logrando que el título sea jugable en configuraciones de hardware base (GTX 1060) manteniendo la fidelidad visual de UE5.</li>
+      <li><strong>Código Escalable:</strong> Arquitectura basada en componentes que permite la adición de nuevas mecánicas sin refactorizar el núcleo del sistema.</li>
+      <li><strong>Pipeline Profesional:</strong> Dominio completo de la pipeline de producción desde el diseño inicial hasta el empaquetado y distribución del software.</li>
+    </ul>
+    <div class="cta-container">
+      <a href="https://www.permanentgame.com" target="_blank" class="btn-permanent">Web Técnica del Proyecto</a>
+      <a href="https://www.youtube.com/watch?v=xqpuxQ0WDAY" target="_blank" class="btn-permanent secondary">Showcase Técnico</a>
+    </div>
+  </ProjectTimelineItem>
+
+
+
+</CaseStudyLayout>
+
+<style>
+  .game-systems {
+    margin: 2rem 0;
+  }
+
+  .game-systems__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .game-systems__card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: border-color var(--transition-fast);
+  }
+
+  .game-systems__card:hover {
+    border-color: var(--color-border-accent);
+  }
+
+  .game-systems__icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .game-systems__card h4 {
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .game-systems__card p {
+    font-size: 0.75rem !important;
+    color: var(--color-text-muted) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .cta-container {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .btn-permanent {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  .btn-permanent.secondary {
+    background: transparent;
+    border: 1px solid var(--color-border-accent);
+    color: var(--color-accent);
+  }
+
+  .btn-permanent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.2);
+  }
+
+  .btn-permanent.secondary:hover {
+    background: rgba(var(--color-accent-rgb), 0.05);
+  }
+
+  @media (max-width: 480px) {
+    .game-systems__grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-container {
+      flex-direction: column;
+    }
+  }
+</style>

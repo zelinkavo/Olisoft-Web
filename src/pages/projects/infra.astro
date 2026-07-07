@@ -1,0 +1,183 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Badge from '../../components/ui/Badge.astro';
+import ProjectTimelineItem from '../../components/ProjectTimelineItem.astro';
+---
+
+<CaseStudyLayout
+  title="Infraestructura & Automatización"
+  description="Gestión Serverless, orquestación on-premise con VPS, CD/CI y flujos de datos automatizados multiplataforma."
+  clusters={['infrastructure', 'development']}
+  projectContext="Soluciones Transversales — Continuo"
+  technologies={['Cloudflare Pages & Workers', 'Dokploy (PaaS)', 'Docker / Traefik', 'n8n Automation', 'Linux VPS (Ubuntu)', 'SIP / Twilio', 'Bash Scripting']}
+>
+  <ProjectTimelineItem title="El Reto" isOpen={true}>
+    <p>
+      El crecimiento de proyectos modernos a menudo trae consigo una fricción técnica significativa: dependencias de pago por uso costosas (Vercel, AWS), dificultades en el despliegue iterativo de aplicaciones, y silos de datos manuales entre áreas de soporte, desarrollo y negocio.
+    </p>
+    <div class="callout">
+      <strong>Objetivo:</strong> Diseñar una infraestructura resiliente, de bajo coste y alta controlabilidad (self-hosted / serverless), estableciendo canalizaciones de despliegue automatizado y conectando los servicios dispares a un hub de automatización central.
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="La Solución">
+    <p>
+      La filosofía implementada es Cloud-Native e Híbrida: externalización de estáticos y computación ligera a la capa Edge (Edge Computing), mientras se retiene el control de las aplicaciones pesadas, bases de datos y la automatización lógica en Virtual Private Servers (VPS).
+    </p>
+    
+    <h3>Pilares de Infraestructura</h3>
+    <ul>
+      <li><strong>Despliegue y Orquestación (Dokploy):</strong> Sustitución de servicios PaaS caros por un ecosistema gestionado a través de Dokploy (alternativa a Coolify/Vercel) en un servidor propio, facilitando despliegues con un clic desde repositorios Git, SSL automatizado con Traefik, y gestión visual de contenedores Docker.</li>
+      <li><strong>Edge Computing & CDN:</strong> Uso exhaustivo de Cloudflare. Desde el alojamiento de sitios estáticos (Cloudflare Pages) con latencia global mínima, hasta el filtrado WAF (Web Application Firewall) para protección contra DDoS y la interceptación de tráfico en el edge con Workers.</li>
+      <li><strong>Automatización (n8n):</strong> Despliegue de una instancia privada de n8n para orquestar la comunicación entre APIs. Creación de nodos lógicos para sincronización de CRMs, webhooks de Stripe a bases de datos relacionales y alertas de infraestructura hacia Telegram y Slack.</li>
+      <li><strong>Telefonía y SMS Fallback:</strong> Red de seguridad técnica configurada mediante Troncales SIP y Twilio, que permite emitir notificaciones críticas de sistema fuera del entorno de red estándar mediante SMS transaccionales.</li>
+    </ul>
+
+    <!-- Infrastructure Architecture Diagram -->
+    <div class="infra-diagram" data-animate="fade-up">
+      <div class="infra-diagram__container">
+        <div class="infra-diagram__layer">
+          <span class="infra-diagram__label">Edge Layer</span>
+          <div class="infra-diagram__nodes">
+            <div class="infra-diagram__node infra-diagram__node--teal">
+              <span>☁️</span> Cloudflare Pages
+            </div>
+            <div class="infra-diagram__node infra-diagram__node--teal">
+              <span>⚡</span> Workers (Edge)
+            </div>
+            <div class="infra-diagram__node infra-diagram__node--teal">
+              <span>🛡️</span> WAF / DDoS
+            </div>
+          </div>
+        </div>
+        <div class="infra-diagram__connector" aria-hidden="true">↓ HTTPS ↓</div>
+        <div class="infra-diagram__layer">
+          <span class="infra-diagram__label">VPS Layer</span>
+          <div class="infra-diagram__nodes">
+            <div class="infra-diagram__node infra-diagram__node--gold">
+              <span>🐳</span> Docker / Traefik
+            </div>
+            <div class="infra-diagram__node infra-diagram__node--gold">
+              <span>🚀</span> Dokploy (PaaS)
+            </div>
+            <div class="infra-diagram__node infra-diagram__node--steel">
+              <span>🗄️</span> MySQL / Redis
+            </div>
+          </div>
+        </div>
+        <div class="infra-diagram__connector" aria-hidden="true">↓ Webhooks ↓</div>
+        <div class="infra-diagram__layer">
+          <span class="infra-diagram__label">Automation Layer</span>
+          <div class="infra-diagram__nodes">
+            <div class="infra-diagram__node infra-diagram__node--gold">
+              <span>🔄</span> n8n Workflows
+            </div>
+            <div class="infra-diagram__node infra-diagram__node--steel">
+              <span>📱</span> Twilio SMS
+            </div>
+            <div class="infra-diagram__node infra-diagram__node--steel">
+              <span>💬</span> Telegram / Slack
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="Resultados">
+    <p>
+      Robustez y ahorro de costes sostenidos bajo una infraestructura escalable que agiliza drásticamente el desarrollo de nuevos proyectos.
+    </p>
+    <ul>
+      <li>Reducción del <strong>80%</strong> de los costes mensuales recurrentes respecto a arquitecturas equivalentes en AWS tradicional / Heroku.</li>
+      <li>Implementación de entornos Staging/Producción aislados en menos de 5 minutos mediante pipeline CI/CD en Dokploy.</li>
+      <li>Monitoreo y respuesta automática ante fallos de APIs de terceros (SMS fallbacks automáticos garantizando 99.9% de uptime real para notificaciones).</li>
+    </ul>
+  </ProjectTimelineItem>
+
+
+
+</CaseStudyLayout>
+
+<style>
+  .infra-diagram {
+    margin: 2rem 0;
+  }
+
+  .infra-diagram__container {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .infra-diagram__layer {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+  }
+
+  .infra-diagram__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-md);
+  }
+
+  .infra-diagram__nodes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .infra-diagram__node {
+    font-size: 0.8rem;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-subtle);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: border-color var(--transition-fast);
+  }
+
+  .infra-diagram__node:hover {
+    border-color: var(--color-border-accent);
+  }
+
+  .infra-diagram__node--gold {
+    border-color: rgba(212, 162, 78, 0.2);
+  }
+
+  .infra-diagram__node--steel {
+    border-color: rgba(124, 149, 196, 0.2);
+  }
+
+  .infra-diagram__node--teal {
+    border-color: rgba(91, 184, 166, 0.2);
+  }
+
+  .infra-diagram__connector {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    padding: var(--space-xs) 0;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 480px) {
+    .infra-diagram__nodes {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,218 @@
+---
+interface Props {
+  title: string;
+  isOpen?: boolean;
+}
+
+const { title, isOpen = false } = Astro.props;
+---
+
+<div class="pt-item" data-animate="fade-up">
+  <div class="pt-marker">
+    <div class:list={['pt-dot', { 'pt-dot--active': isOpen }]}></div>
+    <div class="pt-line" aria-hidden="true"></div>
+  </div>
+  <div class="pt-content">
+    <details class="pt-details" open={isOpen}>
+      <summary class="pt-summary">
+        <h2 class="pt-title">{title}</h2>
+        <span class="pt-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </summary>
+      <div class="pt-body">
+        <slot />
+      </div>
+    </details>
+  </div>
+</div>
+
+<style>
+  .pt-item {
+    display: flex;
+    gap: var(--space-lg);
+    position: relative;
+  }
+
+  /* Target the last item to hide the timeline line */
+  .pt-item:last-child .pt-line {
+    display: none;
+  }
+
+  /* Marker */
+  .pt-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 20px;
+  }
+
+  .pt-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--color-text-muted);
+    background: var(--color-bg-primary);
+    flex-shrink: 0;
+    margin-top: calc(var(--space-md) + 7px);
+    z-index: 1;
+    transition: all var(--transition-fast);
+  }
+
+  .pt-dot--active {
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-primary);
+    box-shadow: 0 0 12px rgba(212, 162, 78, 0.4);
+  }
+
+  .pt-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, var(--color-border-subtle), transparent);
+    min-height: var(--space-xl);
+  }
+
+  /* Content */
+  .pt-content {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: var(--space-xl);
+  }
+
+  .pt-item:last-child .pt-content {
+    padding-bottom: 0;
+  }
+
+  /* Details Box */
+  .pt-details {
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast);
+  }
+
+  .pt-details[open] {
+    border-color: var(--color-border-subtle);
+    background: rgba(23, 27, 36, 0.3);
+  }
+
+  .pt-summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .pt-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .pt-summary::marker {
+    content: '';
+  }
+
+  .pt-summary:hover {
+    background: rgba(23, 27, 36, 0.4);
+  }
+
+  .pt-details[open] .pt-summary:hover {
+    background: transparent;
+  }
+
+  .pt-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 2px 0;
+  }
+
+  .pt-toggle {
+    color: var(--color-text-muted);
+    transition: transform var(--transition-base);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .pt-details[open] .pt-toggle {
+    transform: rotate(180deg);
+  }
+
+  .pt-body {
+    padding: 0 var(--space-md) var(--space-md);
+    animation: slideDown 0.25s ease-out;
+  }
+
+  /* Global typography overrides for the body children to match Experience */
+  .pt-body :global(p) {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: var(--space-sm) 0;
+    line-height: 1.6;
+  }
+
+  .pt-body :global(ul) {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    padding: 0;
+  }
+
+  .pt-body :global(li) {
+    font-size: 0.825rem;
+    color: var(--color-text-secondary);
+    padding-left: var(--space-lg);
+    position: relative;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .pt-body :global(li)::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-primary);
+    font-size: 0.8rem;
+  }
+
+  .pt-body :global(h3) {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  .pt-body :global(.callout) {
+    background: rgba(23, 27, 36, 0.5);
+    border: 1px solid var(--color-border-subtle);
+    border-left: 4px solid var(--color-accent-primary);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pt-item {
+      gap: var(--space-md);
+    }
+  }
+</style>

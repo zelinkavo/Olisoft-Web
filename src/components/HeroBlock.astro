@@ -1,0 +1,885 @@
+---
+/**
+ * HeroBlock.astro — Hero with parallax depth, particles & atmosphere
+ *
+ * Features:
+ * - Crosshatch grid background
+ * - 3 ambient orbs with smooth sine-wave animation
+ * - Gold floating particles (Canvas-backed for perf)
+ * - Parallax on mouse move
+ * - Scroll indicator with growing golden line
+ * - Gradient accent separator at bottom
+ */
+---
+
+<div class="hero" id="hero-parallax">
+  <!-- Layer 1: Grid background -->
+  <div class="hero__layer" data-depth="0.02">
+    <div class="hero__grid" aria-hidden="true"></div>
+  </div>
+
+  <!-- Layer 2: Orbs & particles -->
+  <div class="hero__layer" data-depth="0.04">
+    <div class="hero__orb hero__orb--gold" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--teal" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--steel" aria-hidden="true"></div>
+  </div>
+
+  <!-- Canvas particles (gold dots, performant) -->
+  <canvas class="hero__particles" id="hero-particles" aria-hidden="true"></canvas>
+
+  <!-- Layer 3: Content -->
+  <div class="hero__layer hero__layer--content" data-depth="0.07">
+    <div class="hero__content">
+      <div class="hero__monogram" data-animate="scale-in">
+        <div class="monogram-grid" aria-hidden="true"></div>
+        <div class="monogram-corner monogram-corner--tl"></div>
+        <div class="monogram-corner monogram-corner--tr"></div>
+        <div class="monogram-corner monogram-corner--bl"></div>
+        <div class="monogram-corner monogram-corner--br"></div>
+        <div class="hero__monogram-inner" aria-hidden="true">
+          <span class="hero__monogram-letter">D</span>
+          <span class="hero__monogram-letter hero__monogram-letter--accent">O</span>
+        </div>
+      </div>
+
+      <div class="hero__title-block">
+        <div class="hero__greeting-wrapper" data-animate="fade-up" style="--stagger-index: 0">
+          <span class="greeting-line" aria-hidden="true"></span>
+          <p class="hero__greeting">David Oliver</p>
+          <span class="greeting-line" aria-hidden="true"></span>
+        </div>
+
+        <h1 class="hero__title" data-animate="fade-up" style="--stagger-index: 1">
+          <span class="title-primary">Full Stack Developer</span>
+          <div class="title-secondary">
+            <span class="title-amp">&amp;</span>
+            <span class="title-accent">AI Solutions Engineer</span>
+          </div>
+        </h1>
+
+        <div class="hero__tagline-wrapper" data-animate="fade-up" style="--stagger-index: 2">
+          <span class="tagline-bracket" aria-hidden="true">[</span>
+          <p class="hero__tagline">Orquestador de sistemas digitales autónomos</p>
+          <span class="tagline-bracket" aria-hidden="true">]</span>
+        </div>
+      </div>
+
+      <div class="hero__engineering-specs" data-animate="fade-up" style="--stagger-index: 3">
+        <div class="spec-group">
+          <span class="spec-key">Core Architecture <span class="spec-key-accent">/ Human-AI Colab</span></span>
+          <div class="tech-tags-grid">
+            <span class="tech-tag">Astro 6</span>
+            <span class="tech-tag">React 19</span>
+            <span class="tech-tag">TypeScript 5</span>
+            <span class="tech-tag">Cloudflare</span>
+            <span class="tech-tag">Tailwind 4</span>
+            <span class="tech-tag">React Flow 12</span>
+            <span class="tech-tag">Canvas API</span>
+          </div>
+        </div>
+        <div class="spec-divider" aria-hidden="true"></div>
+        <div class="spec-group">
+          <span class="spec-key">Lighthouse Audit</span>
+          <div class="spec-scores">
+            {[
+              { label: 'Perf.', full: 'Performance', score: 100 },
+              { label: 'A11y.', full: 'Accessibility', score: 100 },
+              { label: 'Best P.', full: 'Best Practices', score: 100 },
+              { label: 'SEO', full: 'SEO', score: 100 }
+            ].map((item) => (
+              <div class="score-badge green" title={`100 ${item.full}`}>
+                <span class="score-label">{item.label}</span>
+                <span class="score-value">{item.score}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll-cta" data-animate="fade-in" style="--stagger-index: 6" aria-hidden="true">
+        <span class="hero__scroll-text">scroll</span>
+        <div class="hero__scroll-line">
+          <div class="hero__scroll-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gradient accent line at bottom -->
+  <div class="hero__accent-line" aria-hidden="true"></div>
+</div>
+
+<script>
+  function initHero() {
+    // ── Parallax ──
+    const hero = document.getElementById('hero-parallax');
+    if (!hero) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReduced && window.innerWidth >= 768) {
+      const layers = hero.querySelectorAll<HTMLElement>('[data-depth]');
+      let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        targetX = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        targetY = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        targetX = 0;
+        targetY = 0;
+      });
+
+      function animateParallax() {
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+        layers.forEach((layer) => {
+          const depth = parseFloat(layer.dataset.depth || '0');
+          layer.style.transform = `translate(${currentX * depth * 120}px, ${currentY * depth * 80}px)`;
+        });
+        requestAnimationFrame(animateParallax);
+      }
+      animateParallax();
+    }
+
+    // ── Canvas Particles ──
+    const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
+    if (!canvas || prefersReduced) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio, 2);
+      canvas.width = hero!.offsetWidth * dpr;
+      canvas.height = hero!.offsetHeight * dpr;
+      ctx!.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    interface Particle {
+      x: number; y: number; baseY: number;
+      size: number; speed: number; opacity: number;
+      phase: number; drift: number;
+      isComet: boolean;
+      trail: { x: number; y: number }[];
+    }
+
+    const PARTICLE_COUNT = 35;
+    const COMET_COUNT = 8;
+    const particles: Particle[] = [];
+    const w = () => hero!.offsetWidth;
+    const h = () => hero!.offsetHeight;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const isComet = i < COMET_COUNT;
+      // Half comets go left, half go right
+      const goesRight = isComet ? (i % 2 === 0) : true;
+      particles.push({
+        x: Math.random() * w(),
+        y: Math.random() * h(),
+        baseY: Math.random() * h(),
+        size: isComet ? 2 + Math.random() * 2 : 1.5 + Math.random() * 3,
+        speed: isComet ? 0.25 + Math.random() * 0.2 : 0.15 + Math.random() * 0.3,
+        opacity: isComet ? 0.35 + Math.random() * 0.3 : 0.15 + Math.random() * 0.4,
+        phase: Math.random() * Math.PI * 2,
+        drift: isComet
+          ? (goesRight ? 1 : -1) * (0.5 + Math.random() * 0.7)
+          : (Math.random() - 0.5) * 0.3,
+        isComet,
+        trail: [],
+      });
+    }
+
+    let frameCount = 0;
+    function drawParticles() {
+      ctx!.clearRect(0, 0, w(), h());
+      frameCount++;
+
+      for (const p of particles) {
+        // Smooth sine-wave float
+        const prevX = p.x;
+        const prevY = p.y;
+        p.y = p.baseY + Math.sin(frameCount * 0.008 * p.speed + p.phase) * 25;
+        p.x += p.drift;
+
+        // Wrap around
+        if (p.x < -10) { p.x = w() + 10; p.trail = []; }
+        if (p.x > w() + 10) { p.x = -10; p.trail = []; }
+
+        // Pulsing opacity
+        const pulse = 0.7 + 0.3 * Math.sin(frameCount * 0.012 + p.phase);
+
+        // Comet trail — long smooth gradient line
+        if (p.isComet) {
+          p.trail.push({ x: p.x, y: p.y });
+          if (p.trail.length > 50) p.trail.shift();
+
+          // Draw smooth tail as connected line segments with gradient
+          if (p.trail.length > 2) {
+            const len = p.trail.length;
+            for (let t = 1; t < len; t++) {
+              const progress = t / len;
+              const alpha = progress * p.opacity * pulse * 0.8;
+              const lineWidth = p.size * progress * 1.2;
+              ctx!.beginPath();
+              ctx!.moveTo(p.trail[t - 1].x, p.trail[t - 1].y);
+              ctx!.lineTo(p.trail[t].x, p.trail[t].y);
+              ctx!.strokeStyle = `rgba(212, 162, 78, ${alpha})`;
+              ctx!.lineWidth = lineWidth;
+              ctx!.lineCap = 'round';
+              ctx!.stroke();
+            }
+          }
+
+          // Comet head glow — larger, brighter
+          ctx!.beginPath();
+          ctx!.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(212, 162, 78, ${p.opacity * pulse * 0.2})`;
+          ctx!.fill();
+        }
+
+        // Main dot
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(212, 162, 78, ${p.opacity * pulse})`;
+        ctx!.fill();
+
+        // Subtle glow for larger non-comet dots
+        if (!p.isComet && p.size > 2.5) {
+          ctx!.beginPath();
+          ctx!.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(212, 162, 78, ${p.opacity * pulse * 0.1})`;
+          ctx!.fill();
+        }
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // ── Scroll Line Growth ──
+    const scrollFill = hero.querySelector('.hero__scroll-fill') as HTMLElement;
+    if (scrollFill) {
+      function updateScrollLine() {
+        const scrollMax = window.innerHeight * 0.5;
+        const progress = Math.min(window.scrollY / scrollMax, 1);
+        scrollFill.style.height = `${progress * 100}%`;
+        scrollFill.style.opacity = String(0.4 + progress * 0.6);
+      }
+      window.addEventListener('scroll', updateScrollLine, { passive: true });
+      updateScrollLine();
+    }
+  }
+
+  document.addEventListener('astro:page-load', initHero);
+  initHero();
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: var(--space-3xl) var(--space-xl);
+    overflow: hidden;
+  }
+
+  .hero__layer {
+    position: absolute;
+    inset: -30px;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .hero__layer--content {
+    position: relative;
+    inset: auto;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  /* Grid */
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212, 162, 78, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 162, 78, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 70%);
+  }
+
+  /* Canvas particles */
+  .hero__particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Orbs — smooth sine wave via CSS */
+  .hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    will-change: transform;
+  }
+
+  .hero__orb--gold {
+    width: 500px;
+    height: 400px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(212, 162, 78, 0.08);
+    animation: orbGold 12s ease-in-out infinite;
+  }
+
+  .hero__orb--teal {
+    width: 300px;
+    height: 300px;
+    bottom: 15%;
+    left: 10%;
+    background: rgba(91, 184, 166, 0.05);
+    animation: orbDrift 14s ease-in-out infinite 2s;
+  }
+
+  .hero__orb--steel {
+    width: 350px;
+    height: 250px;
+    top: 30%;
+    right: 5%;
+    background: rgba(124, 149, 196, 0.05);
+    animation: orbDrift 16s ease-in-out infinite 5s;
+  }
+
+  @keyframes orbGold {
+    0%   { transform: translateX(-50%) translateY(0); opacity: 1; }
+    25%  { transform: translateX(-48%) translateY(-8px); opacity: 0.85; }
+    50%  { transform: translateX(-50%) translateY(-4px); opacity: 0.7; }
+    75%  { transform: translateX(-52%) translateY(-10px); opacity: 0.9; }
+    100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  }
+
+  @keyframes orbDrift {
+    0%   { transform: translate(0, 0); opacity: 1; }
+    33%  { transform: translate(8px, -12px); opacity: 0.7; }
+    66%  { transform: translate(-6px, -6px); opacity: 0.85; }
+    100% { transform: translate(0, 0); opacity: 1; }
+  }
+
+  /* Content — gentle float animation */
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-xl);
+    max-width: 640px;
+    animation: contentFloat 8s ease-in-out infinite;
+  }
+
+  @keyframes contentFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .hero__monogram {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 162, 78, 0.3);
+    background: linear-gradient(135deg, rgba(10,10,15,0.9), rgba(20,20,25,0.8));
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(212, 162, 78, 0.15), inset 0 0 15px rgba(212, 162, 78, 0.05);
+    animation: monogramFloat 6s ease-in-out infinite;
+    overflow: hidden;
+  }
+
+  .monogram-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212, 162, 78, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 162, 78, 0.1) 1px, transparent 1px);
+    background-size: 8px 8px;
+    opacity: 0.5;
+  }
+
+  .monogram-grid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(212,162,78,0.2), transparent);
+    height: 200%;
+    animation: scanline 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0%); }
+  }
+
+  .monogram-corner {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-color: var(--color-accent-primary);
+    border-style: solid;
+    z-index: 2;
+  }
+  .monogram-corner--tl { top: 4px; left: 4px; border-width: 1px 0 0 1px; }
+  .monogram-corner--tr { top: 4px; right: 4px; border-width: 1px 1px 0 0; }
+  .monogram-corner--bl { bottom: 4px; left: 4px; border-width: 0 0 1px 1px; }
+  .monogram-corner--br { bottom: 4px; right: 4px; border-width: 0 1px 1px 0; }
+
+  .hero__monogram-inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .hero__monogram-letter {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(255,255,255,0.2);
+  }
+
+  .hero__monogram-letter--accent {
+    color: var(--color-accent-primary);
+    text-shadow: 0 0 15px rgba(212, 162, 78, 0.4);
+  }
+
+  @keyframes monogramFloat {
+    0%, 100% { transform: translateY(0); box-shadow: 0 0 20px rgba(212, 162, 78, 0.15), inset 0 0 15px rgba(212, 162, 78, 0.05); }
+    50% { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(212, 162, 78, 0.25), inset 0 0 20px rgba(212, 162, 78, 0.1); }
+  }
+
+  .hero__title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .hero__greeting-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .greeting-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent-primary), transparent);
+    opacity: 0.5;
+  }
+
+  .hero__greeting {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent-primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hero__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    line-height: 1.1;
+  }
+
+  .title-primary {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    text-align: center;
+  }
+
+  .title-secondary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: -0.15em;
+  }
+
+  .title-amp {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .title-accent {
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    background: linear-gradient(90deg, var(--color-text-primary), var(--color-text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+  }
+
+  .hero__tagline-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: -0.25rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .tagline-bracket {
+    font-family: var(--font-mono);
+    color: var(--color-accent-primary);
+    opacity: 0.5;
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+
+  .hero__tagline {
+    font-size: clamp(0.65rem, 3.4vw, 0.85rem);
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+    font-weight: 300;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .hero__title-block {
+      gap: var(--space-sm);
+    }
+    .title-secondary {
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+    .title-amp {
+      margin: var(--space-xs) 0;
+    }
+    .hero__tagline-wrapper {
+      padding: var(--space-sm) var(--space-md);
+    }
+    .hero__tagline {
+      font-size: 0.85rem;
+      text-align: center;
+      line-height: 1.4;
+    }
+  }
+
+  /* --- Engineering Specs (Minimalist layout) --- */
+  .hero__engineering-specs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+    padding: var(--space-md) var(--space-xl);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0.02) 80%, transparent);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .spec-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .spec-key {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .spec-key-accent {
+    color: var(--color-accent-primary);
+    opacity: 0.6;
+    font-weight: 400;
+  }
+
+  .tech-tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    justify-content: center;
+    max-width: 100%;
+    margin-top: 12px;
+  }
+
+  .tech-tag {
+    position: relative;
+    isolation: isolate;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: default;
+    overflow: hidden;
+  }
+
+  /* Architectural scanner light effect inside the tag */
+  .tech-tag::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 162, 78, 0.25), transparent);
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+  /* Interaction Group (Hover one, dim others) */
+  .tech-tags-grid:has(.tech-tag:hover) .tech-tag:not(:hover) {
+    opacity: 0.35;
+    filter: blur(1px);
+    border-color: transparent;
+  }
+
+  .tech-tag:hover {
+    color: var(--color-accent-primary);
+    border-color: rgba(212, 162, 78, 0.4);
+    background: rgba(212, 162, 78, 0.08);
+    box-shadow: 0 4px 16px rgba(212, 162, 78, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .tech-tag:hover::before {
+    left: 100%;
+  }
+
+  .spec-divider {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+  }
+
+  .spec-scores {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .score-badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(12, 206, 107, 0.04);
+    border: 1px solid rgba(12, 206, 107, 0.15);
+    border-radius: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .score-badge:hover {
+    background: rgba(12, 206, 107, 0.08);
+    border-color: rgba(12, 206, 107, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(12, 206, 107, 0.1);
+  }
+
+  .score-badge.green::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #0cce6b;
+    box-shadow: 0 0 8px rgba(12, 206, 107, 0.6);
+  }
+
+  .score-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  .score-value {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #0cce6b;
+  }
+
+  @media (max-width: 640px) {
+    .spec-scores {
+      gap: 6px;
+      flex-wrap: nowrap;
+    }
+    .score-badge {
+      padding: 3px 7px;
+      gap: 4px;
+    }
+    .score-label {
+      font-size: 0.65rem;
+    }
+    .score-value {
+      font-size: 0.7rem;
+    }
+  }
+
+  /* Scroll CTA — line grows on scroll */
+  .hero__scroll-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    margin-bottom: -140px; /* offsets the 140px scroll line, centering the text block perfectly */
+  }
+
+  .hero__scroll-text {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.15em;
+    margin-right: -0.15em; /* fix subpixel optical centering against the 1px line */
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 140px;
+    background: rgba(212, 162, 78, 0.1);
+    position: relative;
+    border-radius: 1px;
+  }
+
+  .hero__scroll-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(to bottom, var(--color-accent-primary), rgba(212, 162, 78, 0.3));
+    box-shadow: 0 0 8px rgba(212, 162, 78, 0.4);
+    border-radius: 1px;
+    transition: height 0.1s linear;
+  }
+
+  /* Accent line at bottom */
+  .hero__accent-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 162, 78, 0.25) 20%,
+      rgba(124, 149, 196, 0.2) 50%,
+      rgba(91, 184, 166, 0.2) 80%,
+      transparent 100%
+    );
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: var(--space-2xl) var(--space-md);
+    }
+    .hero__monogram {
+      width: 72px;
+      height: 72px;
+    }
+    .hero__monogram-letter {
+      font-size: 1.8rem;
+    }
+    .tagline-bracket {
+      font-size: 0.9rem;
+    }
+    .hero__orb--teal,
+    .hero__orb--steel {
+      display: none;
+    }
+    .hero__orb--gold {
+      width: 300px;
+      height: 250px;
+    }
+    .hero__scroll-line {
+      height: 100px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero__engineering-specs {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-lg);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03) 20%, rgba(255, 255, 255, 0.03) 80%, transparent);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: var(--space-md) var(--space-sm);
+      margin-top: var(--space-xl);
+    }
+
+    .spec-divider {
+      display: none;
+    }
+    
+    .spec-group {
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      padding-bottom: var(--space-sm);
+    }
+    
+    .tech-tag {
+      padding: 3px 8px;
+      font-size: 0.65rem;
+      letter-spacing: -0.01em;
+    }
+
+    .tech-tags-grid {
+      gap: 6px;
+      max-width: 100%;
+    }
+    
+    .spec-group:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

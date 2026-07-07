@@ -1,0 +1,183 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Badge from '../../components/ui/Badge.astro';
+import ProjectTimelineItem from '../../components/ProjectTimelineItem.astro';
+---
+
+<CaseStudyLayout
+  title="Simple Crypto Alerts"
+  description="Aplicación móvil nativa en tiendas para monitoreo de precios y alertas push en tiempo real de criptomonedas."
+  clusters={['development']}
+  projectContext="Proyecto Propio — 2024"
+  technologies={['React Native', 'Expo', 'TypeScript', 'Zustand', 'EAS Build', 'CoinGecko API', 'Reanimated']}
+>
+  <ProjectTimelineItem title="El Reto" isOpen={true}>
+    <p>
+      El ecosistema de aplicaciones crypto suele ser denso, enfocado a traders profesionales y lleno de gráficos incomprensibles para el usuario promedio que solo quiere saber cuándo Bitcoin o Ethereum alcanzan un precio objetivo. La mayoría de estas apps requieren registros pesados o cobran suscripciones mensuales solo por enviar notificaciones push.
+    </p>
+    <div class="callout">
+      <strong>Objetivo:</strong> Construir una app móvil multiplataforma (iOS y Android) estéticamente impecable, de uso anónimo y completamente centrada en crear notificaciones de precio de forma intuitiva, sin ruido visual.
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="La Solución">
+    <p>
+      Elegí React Native con Expo para lograr un desarrollo ágil y mantener un único codebase. La app se diseñó con un fuerte enfoque en UX, utilizando interacciones hápticas y animaciones fluidas con Reanimated.
+    </p>
+    
+    <h3>Ingeniería y Backend</h3>
+    <ul>
+      <li><strong>Arquitectura de Estado:</strong> Implementación de Zustand para gestión de estado local persistente, garantizando que la app retenga las alertas y favoritos incluso sin conexión.</li>
+      <li><strong>Data Polling:</strong> Integración robusta con la API de CoinGecko, implementando una caché inteligente y un sistema de backoff exponencial en caso de límites de rate de la API para asegurar actualizaciones precisas del mercado sin saturar los servicios.</li>
+      <li><strong>Motor de Notificaciones:</strong> Uso del sistema de notificaciones locales de Expo en combinación con tareas en segundo plano (Background Fetch) para verificar precios aunque la app esté cerrada, validando si se cruzan los thresholds del usuario.</li>
+    </ul>
+
+    <!-- App Feature Showcase -->
+    <div class="app-showcase" data-animate="fade-up">
+      <div class="app-showcase__screen">
+        <div class="app-showcase__header">
+          <span class="app-showcase__status">● LIVE</span>
+          <span class="app-showcase__title-bar">Simple Crypto Alerts</span>
+        </div>
+        <div class="app-showcase__features">
+          <div class="app-showcase__feature">
+            <span class="app-showcase__icon">🔔</span>
+            <div>
+              <strong>Alertas de Precio</strong>
+              <p>Configura umbrales para cualquier crypto. Notificación push cuando se crucen.</p>
+            </div>
+          </div>
+          <div class="app-showcase__feature">
+            <span class="app-showcase__icon">📊</span>
+            <div>
+              <strong>Monitoreo 24/7</strong>
+              <p>Background Fetch verifica precios incluso con la app cerrada.</p>
+            </div>
+          </div>
+          <div class="app-showcase__feature">
+            <span class="app-showcase__icon">⚡</span>
+            <div>
+              <strong>Modo Pro</strong>
+              <p>Alertas ilimitadas, intervalos de 1 minuto, prioridad alta.</p>
+            </div>
+          </div>
+          <div class="app-showcase__feature">
+            <span class="app-showcase__icon">🔒</span>
+            <div>
+              <strong>Uso Anónimo</strong>
+              <p>Sin registro. Sin datos personales. Todo local en el dispositivo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="app-showcase__stores">
+          <span class="app-showcase__badge-store">▶ Google Play</span>
+          <span class="app-showcase__badge-store"> App Store</span>
+        </div>
+      </div>
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="Resultados">
+    <p>
+      El proyecto superó las validaciones de las tiendas oficiales, incluyendo las rigurosas políticas de revisión de Apple App Store respecto a la temática crypto.
+    </p>
+    <ul>
+      <li>Publicación exitosa nativa tanto en Google Play Console como en Apple App Store.</li>
+      <li>Implementación de CI/CD automatizado mediante EAS (Expo Application Services) para la construcción en la nube de los bundles binarios (AAB e IPA).</li>
+      <li>Adopción por un grupo de prueba orgánico con feedback excepcionalmente positivo sobre la claridad de la interfaz frente a alternativas como Binance o CoinMarketCap.</li>
+    </ul>
+  </ProjectTimelineItem>
+
+
+
+</CaseStudyLayout>
+
+<style>
+  .app-showcase {
+    margin: 2rem 0;
+  }
+
+  .app-showcase__screen {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .app-showcase__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-card);
+  }
+
+  .app-showcase__status {
+    font-size: 0.7rem;
+    color: var(--color-accent-tertiary);
+    font-family: var(--font-mono);
+  }
+
+  .app-showcase__title-bar {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .app-showcase__features {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .app-showcase__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .app-showcase__feature strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .app-showcase__feature p {
+    font-size: 0.75rem !important;
+    color: var(--color-text-muted) !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .app-showcase__icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .app-showcase__stores {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .app-showcase__badge-store {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-accent-secondary);
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+  }
+</style>

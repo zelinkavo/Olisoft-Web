@@ -1,0 +1,49 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import Badge from '../../components/ui/Badge.astro';
+import SvensonFlowDiagram from '../../components/interactive/SvensonFlowDiagram';
+import ProjectTimelineItem from '../../components/ProjectTimelineItem.astro';
+---
+
+<CaseStudyLayout
+  title="Enterprise AI Orchestration"
+  description="Implementación de IA Generativa y orquestación multi-agente para la automatización de agendas médicas y resolución de dudas."
+  clusters={['ai', 'development', 'infrastructure']}
+  projectContext="Clínicas Svenson — 2024"
+  technologies={['Langchain', 'LlamaIndex', 'ChromaDB', 'Python', 'Terraform', 'OpenAI GPT-4', 'Meta WhatsApp API', 'MySQL']}
+>
+  <ProjectTimelineItem title="El Reto" isOpen={true}>
+    <p>
+      Clínicas Svenson necesitaba optimizar la gestión de pacientes ante volúmenes críticos de solicitudes. El desafío era integrar la IA en un flujo que no solo fuera reactivo (responder dudas), sino proactivo: asegurando que las citas se agendaran correctamente y que los pacientes asistieran mediante un sistema de recordatorios inteligente.
+    </p>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="La Solución">
+    <p>
+      Diseñé una arquitectura híbrida que combina la potencia de los LLMs con la estabilidad de los servicios de backend tradicionales:
+    </p>
+    <ul>
+      <li><strong>Infraestructura como Código (Terraform):</strong> Despliegue basado en IaC para garantizar un entorno estable, escalable y replicable, eliminando la dependencia de hostings convencionales.</li>
+      <li><strong>Orquestación de IA (Langchain):</strong> Flujos inteligentes que interpretan la intención del paciente y ejecutan acciones sobre el CRM mediante el consumo de APIs REST en tiempo real.</li>
+      <li><strong>Arquitectura RAG (LlamaIndex & ChromaDB):</strong> Implementé un motor de Generación Aumentada por Recuperación utilizando una base de datos vectorial. Esto permite que la IA consulte manuales médicos y resuelva dudas complejas con precisión técnica.</li>
+      <li><strong>Sincronización Proactiva (Python Services):</strong> Desarrollé servicios en Python encargados de la comunicación saliente. Estos procesos consumen las APIs de Svenson para identificar próximas citas y ejecutar recordatorios automáticos con lógica de fallback (WhatsApp/SMS).</li>
+      <li><strong>Human-in-the-Loop & Analytics:</strong> El sistema incluye un traspaso fluido a agentes humanos y un Dashboard integral donde el equipo de Operaciones monitoriza el rendimiento, los logs de los agentes de IA y descarga informes de conversión.</li>
+    </ul>
+
+    <!-- Architecture Diagram — React Flow Island -->
+    <div data-animate="fade-up">
+      <SvensonFlowDiagram client:visible />
+    </div>
+  </ProjectTimelineItem>
+
+  <ProjectTimelineItem title="Resultados">
+    <ul>
+      <li><strong>Reducción del 45%</strong> en las tareas manuales de gestión de agenda.</li>
+      <li><strong>Mejora del 30%</strong> en la tasa de asistencia gracias a la proactividad del sistema multicanal.</li>
+      <li><strong>SLA de respuesta instantáneo</strong> y visibilidad total del dato para el equipo de operaciones.</li>
+    </ul>
+  </ProjectTimelineItem>
+
+
+
+</CaseStudyLayout>

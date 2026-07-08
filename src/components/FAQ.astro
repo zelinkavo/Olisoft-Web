@@ -1,0 +1,122 @@
+---
+/**
+ * FAQ.astro — Accordion FAQ component
+ *
+ * Pure HTML/CSS using <details>/<summary>.
+ * Zero client JS required.
+ */
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {items.map((item, i) => (
+    <details class="faq__item" data-animate="fade-up" style={`--stagger-index: ${i}`}>
+      <summary class="faq__question">
+        <span class="faq__text">{item.question}</span>
+        <span class="faq__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </summary>
+      <div class="faq__answer">
+        <p>{item.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq__item {
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .faq__item[open] {
+    border-color: var(--color-border-subtle);
+    background: rgba(23, 27, 36, 0.3);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question::marker {
+    content: '';
+  }
+
+  .faq__question:hover {
+    background: rgba(23, 27, 36, 0.4);
+  }
+
+  .faq__item[open] .faq__question:hover {
+    background: transparent;
+  }
+
+  .faq__text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .faq__icon {
+    color: var(--color-text-muted);
+    transition: transform var(--transition-base);
+    flex-shrink: 0;
+    margin-left: var(--space-md);
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    padding: 0 var(--space-lg) var(--space-lg);
+    animation: faqSlideDown 0.25s ease-out;
+  }
+
+  .faq__answer p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @keyframes faqSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

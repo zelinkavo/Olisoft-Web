@@ -18,19 +18,12 @@ const socialLinks = [
     href: 'https://github.com/zelinkavo',
     icon: 'github',
   },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/david-oliver-16729971/',
-    icon: 'linkedin',
-  },
 ];
 
 const navLinks = [
-  { href: '/#hero', label: { es: 'Inicio', en: 'Home' } },
-  { href: '/#projects', label: { es: 'Proyectos', en: 'Projects' } },
-  { href: '/#skills', label: { es: 'Skills', en: 'Skills' } },
-  { href: '/#experience', label: { es: 'Experiencia', en: 'Experience' } },
-  { href: '/#contact', label: { es: 'Contacto', en: 'Contact' } },
+  { href: '/', label: { es: 'Inicio', en: 'Home' } },
+  { href: '/simple-crypto-alerts', label: { es: 'Simple Crypto Alerts', en: 'Simple Crypto Alerts' } },
+  { href: '/wallapro', label: { es: 'WallaPro', en: 'WallaPro' } },
 ];
 ---
 
@@ -96,14 +89,15 @@ const navLinks = [
       <p class="footer__status">
         <span class="status-dot"></span>
         <span class="status-text">
-          &copy; {currentYear} DO. {lang === 'es' ? 'Sistemas Operativos (All clear)' : 'Systems Operational (All clear)'}
+          &copy; {currentYear} OliSoft APPs. {lang === 'es' ? 'Todos los sistemas operativos' : 'All systems operational'}
         </span>
       </p>
       
       <div class="footer__credits">
-        <span class="credits-label">SYS_ENGINE:</span>
+        <span class="credits-label">BUILT WITH:</span>
         <span class="tech-tag">Astro 6</span>
         <span class="tech-tag">Cloudflare</span>
+        <span class="tech-tag">TypeScript</span>
       </div>
     </div>
   </div>

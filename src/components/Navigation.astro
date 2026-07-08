@@ -16,10 +16,7 @@ const { lang = 'es' } = Astro.props;
 
 const navItems = [
   { href: '/#hero', label: { es: 'Inicio', en: 'Home' } },
-  { href: '/#projects', label: { es: 'Proyectos', en: 'Projects' } },
-  { href: '/#skills', label: { es: 'Skills', en: 'Skills' } },
-  { href: '/#experience', label: { es: 'Experiencia', en: 'Experience' } },
-  { href: '/#contact', label: { es: 'Contacto', en: 'Contact' } },
+  { href: '/#apps', label: { es: 'Apps', en: 'Apps' } },
 ];
 ---
 
@@ -32,11 +29,11 @@ const navItems = [
     <!-- Logo -->
     <a href="/#hero" class="nav__logo" aria-label="Ir al inicio">
       <div class="nav__logo-mark" aria-hidden="true">
-        <span class="mark-d">D</span><span class="mark-o">O</span>
+        <span class="mark-o">O</span><span class="mark-s">S</span>
       </div>
       <div class="nav__logo-text">
-        <span class="text-first">DAVID</span>
-        <span class="text-last">OLIVER</span>
+        <span class="text-first">OLISOFT</span>
+        <span class="text-last">APPs</span>
       </div>
     </a>
 
@@ -249,11 +246,11 @@ const navItems = [
     z-index: 1;
   }
 
-  .mark-d {
+  .mark-o {
     color: var(--color-text-primary);
   }
 
-  .mark-o {
+  .mark-s {
     color: var(--color-accent-primary);
   }
 

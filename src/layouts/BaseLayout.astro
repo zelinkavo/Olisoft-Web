@@ -11,7 +11,7 @@
  */
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-import { generatePersonJsonLd, generateWebsiteJsonLd } from '../lib/seo';
+import { generateOrganizationJsonLd, generateWebsiteJsonLd } from '../lib/seo';
 import { skillClusters } from '../data/skills';
 import '../styles/global.css';
 
@@ -26,7 +26,7 @@ interface Props {
 
 const {
   title,
-  description = 'Senior Full Stack Developer & AI Solutions Engineer — Orquestador de sistemas autónomos y ecosistemas digitales',
+  description = 'OliSoft APPs — Aplicaciones móviles con ingeniería de precisión',
   lang = 'es',
   ogImage = '/og-default.png',
   includeNav = true,
@@ -34,7 +34,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const personJsonLd = generatePersonJsonLd(lang);
+const personJsonLd = generateOrganizationJsonLd(lang);
 const websiteJsonLd = generateWebsiteJsonLd();
 
 const allKeywords = skillClusters.map(c => c.skills.map(s => s.name)).flat().join(', ');

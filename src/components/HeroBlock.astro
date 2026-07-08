@@ -10,6 +10,11 @@
  * - Scroll indicator with growing golden line
  * - Gradient accent separator at bottom
  */
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
 ---
 
 <div class="hero" id="hero-parallax">
@@ -38,62 +43,25 @@
         <div class="monogram-corner monogram-corner--bl"></div>
         <div class="monogram-corner monogram-corner--br"></div>
         <div class="hero__monogram-inner" aria-hidden="true">
-          <span class="hero__monogram-letter">D</span>
-          <span class="hero__monogram-letter hero__monogram-letter--accent">O</span>
+          <span class="hero__monogram-letter">O</span>
+          <span class="hero__monogram-letter hero__monogram-letter--accent">S</span>
         </div>
       </div>
 
       <div class="hero__title-block">
-        <div class="hero__greeting-wrapper" data-animate="fade-up" style="--stagger-index: 0">
-          <span class="greeting-line" aria-hidden="true"></span>
-          <p class="hero__greeting">David Oliver</p>
-          <span class="greeting-line" aria-hidden="true"></span>
-        </div>
-
-        <h1 class="hero__title" data-animate="fade-up" style="--stagger-index: 1">
-          <span class="title-primary">Full Stack Developer</span>
-          <div class="title-secondary">
-            <span class="title-amp">&amp;</span>
-            <span class="title-accent">AI Solutions Engineer</span>
-          </div>
+        <h1 class="hero__title" data-animate="fade-up" style="--stagger-index: 0">
+          <span class="title-primary">OliSoft</span>
+          <span class="title-accent">APPs</span>
         </h1>
 
-        <div class="hero__tagline-wrapper" data-animate="fade-up" style="--stagger-index: 2">
+        <div class="hero__tagline-wrapper" data-animate="fade-up" style="--stagger-index: 1">
           <span class="tagline-bracket" aria-hidden="true">[</span>
-          <p class="hero__tagline">Orquestador de sistemas digitales autónomos</p>
+          <p class="hero__tagline">
+            {lang === 'es'
+              ? 'Aplicaciones móviles con ingeniería de precisión'
+              : 'Precision-engineered mobile apps'}
+          </p>
           <span class="tagline-bracket" aria-hidden="true">]</span>
-        </div>
-      </div>
-
-      <div class="hero__engineering-specs" data-animate="fade-up" style="--stagger-index: 3">
-        <div class="spec-group">
-          <span class="spec-key">Core Architecture <span class="spec-key-accent">/ Human-AI Colab</span></span>
-          <div class="tech-tags-grid">
-            <span class="tech-tag">Astro 6</span>
-            <span class="tech-tag">React 19</span>
-            <span class="tech-tag">TypeScript 5</span>
-            <span class="tech-tag">Cloudflare</span>
-            <span class="tech-tag">Tailwind 4</span>
-            <span class="tech-tag">React Flow 12</span>
-            <span class="tech-tag">Canvas API</span>
-          </div>
-        </div>
-        <div class="spec-divider" aria-hidden="true"></div>
-        <div class="spec-group">
-          <span class="spec-key">Lighthouse Audit</span>
-          <div class="spec-scores">
-            {[
-              { label: 'Perf.', full: 'Performance', score: 100 },
-              { label: 'A11y.', full: 'Accessibility', score: 100 },
-              { label: 'Best P.', full: 'Best Practices', score: 100 },
-              { label: 'SEO', full: 'SEO', score: 100 }
-            ].map((item) => (
-              <div class="score-badge green" title={`100 ${item.full}`}>
-                <span class="score-label">{item.label}</span>
-                <span class="score-value">{item.score}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -482,33 +450,13 @@
     gap: var(--space-lg);
   }
 
-  .hero__greeting-wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-md);
-  }
-
-  .greeting-line {
-    width: 40px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-accent-primary), transparent);
-    opacity: 0.5;
-  }
-
-  .hero__greeting {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-accent-primary);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
   .hero__title {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-xs);
+    justify-content: center;
+    gap: var(--space-md);
     line-height: 1.1;
+    flex-wrap: wrap;
   }
 
   .title-primary {
@@ -519,26 +467,11 @@
     text-align: center;
   }
 
-  .title-secondary {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    margin-top: -0.15em;
-  }
-
-  .title-amp {
-    font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 300;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.4);
-  }
-
   .title-accent {
-    font-size: clamp(1.5rem, 4vw, 2.8rem);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    background: linear-gradient(90deg, var(--color-text-primary), var(--color-text-muted));
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: var(--gradient-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -569,21 +502,9 @@
     color: var(--color-text-muted);
     letter-spacing: 0.02em;
     font-weight: 300;
-    white-space: nowrap;
   }
 
   @media (max-width: 640px) {
-    .hero__title-block {
-      gap: var(--space-sm);
-    }
-    .title-secondary {
-      flex-direction: row;
-      justify-content: center;
-      gap: var(--space-sm);
-    }
-    .title-amp {
-      margin: var(--space-xs) 0;
-    }
     .hero__tagline-wrapper {
       padding: var(--space-sm) var(--space-md);
     }
@@ -591,173 +512,6 @@
       font-size: 0.85rem;
       text-align: center;
       line-height: 1.4;
-    }
-  }
-
-  /* --- Engineering Specs (Minimalist layout) --- */
-  .hero__engineering-specs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xl);
-    margin-top: var(--space-2xl);
-    padding: var(--space-md) var(--space-xl);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0.02) 80%, transparent);
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    width: 100%;
-    max-width: 760px;
-  }
-
-  .spec-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .spec-key {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .spec-key-accent {
-    color: var(--color-accent-primary);
-    opacity: 0.6;
-    font-weight: 400;
-  }
-
-  .tech-tags-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    justify-content: center;
-    max-width: 100%;
-    margin-top: 12px;
-  }
-
-  .tech-tag {
-    position: relative;
-    isolation: isolate;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-text-secondary);
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    cursor: default;
-    overflow: hidden;
-  }
-
-  /* Architectural scanner light effect inside the tag */
-  .tech-tag::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%; width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 162, 78, 0.25), transparent);
-    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-  }
-
-  /* Interaction Group (Hover one, dim others) */
-  .tech-tags-grid:has(.tech-tag:hover) .tech-tag:not(:hover) {
-    opacity: 0.35;
-    filter: blur(1px);
-    border-color: transparent;
-  }
-
-  .tech-tag:hover {
-    color: var(--color-accent-primary);
-    border-color: rgba(212, 162, 78, 0.4);
-    background: rgba(212, 162, 78, 0.08);
-    box-shadow: 0 4px 16px rgba(212, 162, 78, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .tech-tag:hover::before {
-    left: 100%;
-  }
-
-  .spec-divider {
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
-  }
-
-  .spec-scores {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .score-badge {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    background: rgba(12, 206, 107, 0.04);
-    border: 1px solid rgba(12, 206, 107, 0.15);
-    border-radius: 100px;
-    transition: all 0.3s ease;
-  }
-
-  .score-badge:hover {
-    background: rgba(12, 206, 107, 0.08);
-    border-color: rgba(12, 206, 107, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(12, 206, 107, 0.1);
-  }
-
-  .score-badge.green::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #0cce6b;
-    box-shadow: 0 0 8px rgba(12, 206, 107, 0.6);
-  }
-
-  .score-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    letter-spacing: 0.02em;
-  }
-
-  .score-value {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #0cce6b;
-  }
-
-  @media (max-width: 640px) {
-    .spec-scores {
-      gap: 6px;
-      flex-wrap: nowrap;
-    }
-    .score-badge {
-      padding: 3px 7px;
-      gap: 4px;
-    }
-    .score-label {
-      font-size: 0.65rem;
-    }
-    .score-value {
-      font-size: 0.7rem;
     }
   }
 
@@ -845,41 +599,5 @@
     }
   }
 
-  @media (max-width: 640px) {
-    .hero__engineering-specs {
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-lg);
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03) 20%, rgba(255, 255, 255, 0.03) 80%, transparent);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      padding: var(--space-md) var(--space-sm);
-      margin-top: var(--space-xl);
-    }
 
-    .spec-divider {
-      display: none;
-    }
-    
-    .spec-group {
-      width: 100%;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      padding-bottom: var(--space-sm);
-    }
-    
-    .tech-tag {
-      padding: 3px 8px;
-      font-size: 0.65rem;
-      letter-spacing: -0.01em;
-    }
-
-    .tech-tags-grid {
-      gap: 6px;
-      max-width: 100%;
-    }
-    
-    .spec-group:last-child {
-      border-bottom: none;
-    }
-  }
 </style>

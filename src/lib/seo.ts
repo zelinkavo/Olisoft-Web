@@ -15,33 +15,22 @@ export interface SEOProps {
 }
 
 /**
- * Generate JSON-LD structured data for the portfolio
+ * Generate JSON-LD structured data for OliSoft APPs
  */
-export function generatePersonJsonLd(lang: 'es' | 'en' = 'es') {
+export function generateOrganizationJsonLd(lang: 'es' | 'en' = 'es') {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'David Oliver',
-    jobTitle:
-      lang === 'es'
-        ? 'Senior Full Stack Developer & AI Solutions Engineer'
-        : 'Senior Full Stack Developer & AI Solutions Engineer',
+    '@type': 'Organization',
+    name: 'OliSoft APPs',
     description:
       lang === 'es'
-        ? 'Orquestador de sistemas autónomos y ecosistemas digitales'
-        : 'Orchestrator of autonomous systems and digital ecosystems',
-    url: 'https://davidoliver-ai.pages.dev',
-    sameAs: [
-      'https://github.com/zelinkavo',
-      'https://www.linkedin.com/in/david-oliver-16729971/',
-    ],
-    knowsAbout: [
-      'Artificial Intelligence',
-      'Full Stack Development',
-      'Cloud Infrastructure',
-      'Multi-Agent Orchestration',
-      'DevOps',
-    ],
+        ? 'Creadores de aplicaciones móviles con ingeniería de precisión'
+        : 'Creators of precision-engineered mobile applications',
+    url: 'https://olisoft-apps.pages.dev',
+    brand: {
+      '@type': 'Brand',
+      name: 'OliSoft',
+    },
   };
 }
 
@@ -52,8 +41,8 @@ export function generateWebsiteJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Portfolio Senior 2026',
-    url: 'https://davidoliver-ai.pages.dev',
+    name: 'OliSoft APPs',
+    url: 'https://olisoft-apps.pages.dev',
     inLanguage: ['es', 'en'],
   };
 }

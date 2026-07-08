@@ -20,6 +20,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.8",
     "@astrojs/react": "^4.3.0",
+    "@astrojs/sitemap": "^3.7.3",
     "@xyflow/react": "^12.10.2",
     "astro": "^6.1.5",
     "react": "^19.1.0",

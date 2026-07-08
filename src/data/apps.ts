@@ -53,17 +53,241 @@ export const apps: App[] = [
     slug: 'simple-crypto-alerts',
     name: 'Simple Crypto Alerts',
     tagline: {
-      es: 'Monitoreo de criptomonedas y alertas push en tiempo real',
-      en: 'Real-time crypto monitoring and push alerts',
+      es: 'Alertas de precio cripto y monitorización en tiempo real',
+      en: 'Real-time crypto price alerts and monitoring',
     },
     description: {
-      es: 'Configura umbrales de precio para cualquier criptomoneda y recibe notificaciones al instante. Sin registro, sin complicaciones.',
-      en: 'Set price thresholds for any cryptocurrency and get notified instantly. No sign-up, no hassle.',
+      es: 'Configura alertas en segundos y deja que la app supervise el mercado por ti. Notificaciones precisas en tiempo real, incluso con la app cerrada.',
+      en: 'Set alerts in seconds and let the app monitor the market for you. Accurate real-time notifications, even when the app is closed.',
     },
     icon: '\u26A1',
-    googlePlayUrl: '',
+    googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.simplecryptoalerts.app',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API'],
     color: '#d4a24e',
+    features: {
+      es: [
+        {
+          icon: '\uD83D\uDD14',
+          title: { es: 'Alertas inteligentes', en: 'Smart Alerts' },
+          description: {
+            es: 'Crea alertas por precio o porcentaje y recíbelas exactamente cuando se activan. Umbral fijo o cambio porcentual.',
+            en: 'Create alerts by price or percentage and receive them exactly when they trigger. Fixed threshold or percentage change.',
+          },
+        },
+        {
+          icon: '\uD83C\uDF10',
+          title: { es: 'Crypto Live Monitor', en: 'Crypto Live Monitor' },
+          description: {
+            es: 'Monitorización continua de precios en segundo plano para que tus alertas sean siempre fiables y estén actualizadas.',
+            en: 'Continuous background price monitoring so your alerts are always reliable and up to date.',
+          },
+        },
+        {
+          icon: '\uD83D\uDD0A',
+          title: { es: 'Super Sound Alert', en: 'Super Sound Alert' },
+          description: {
+            es: 'Avisos visuales acompañados de una alarma sonora clara y fácilmente reconocible. Modo Pro para alertas más intensas.',
+            en: 'Visual notifications accompanied by a clear, easily recognizable sound alarm. Pro mode for more intense alerts.',
+          },
+        },
+        {
+          icon: '\u26A1',
+          title: { es: 'Rápida y efectiva', en: 'Fast and Effective' },
+          description: {
+            es: 'Configura alertas en segundos con una interfaz clara e intuitiva, sin configuraciones confusas.',
+            en: 'Set alerts in seconds with a clear, intuitive interface. No confusing settings.',
+          },
+        },
+        {
+          icon: '\uD83D\uDCCF',
+          title: { es: 'Tipos de alerta versátiles', en: 'Versatile Alert Types' },
+          description: {
+            es: 'Umbral fijo (por encima/por debajo) o cambio porcentual (subida/bajada). Tú eliges cómo quieres ser notificado.',
+            en: 'Fixed threshold (above/below) or percentage change (up/down). You choose how you want to be notified.',
+          },
+        },
+        {
+          icon: '\uD83D\uDEE0\uFE0F',
+          title: { es: 'Gestión eficiente', en: 'Efficient Management' },
+          description: {
+            es: 'Pausa, edita, duplica o elimina alertas fácilmente desde un panel central.',
+            en: 'Pause, edit, duplicate or delete alerts easily from a central panel.',
+          },
+        },
+        {
+          icon: '\uD83D\uDCCA',
+          title: { es: 'Cobertura de mercado', en: 'Market Coverage' },
+          description: {
+            es: 'Sigue las 20 criptomonedas más populares, incluyendo Bitcoin, Ethereum y principales altcoins.',
+            en: 'Track the 20 most popular cryptocurrencies, including Bitcoin, Ethereum and major altcoins.',
+          },
+        },
+        {
+          icon: '\u2B50',
+          title: { es: 'Extras opcionales', en: 'Optional Extras' },
+          description: {
+            es: 'Marca tus criptos favoritas y usa el modo día/noche para una experiencia más cómoda.',
+            en: 'Mark your favorite cryptos and use day/night mode for a more comfortable experience.',
+          },
+        },
+      ],
+      en: [
+        {
+          icon: '\uD83D\uDD14',
+          title: { es: 'Alertas inteligentes', en: 'Smart Alerts' },
+          description: {
+            es: 'Crea alertas por precio o porcentaje y recíbelas exactamente cuando se activan. Umbral fijo o cambio porcentual.',
+            en: 'Create alerts by price or percentage and receive them exactly when they trigger. Fixed threshold or percentage change.',
+          },
+        },
+        {
+          icon: '\uD83C\uDF10',
+          title: { es: 'Crypto Live Monitor', en: 'Crypto Live Monitor' },
+          description: {
+            es: 'Monitorización continua de precios en segundo plano para que tus alertas sean siempre fiables y estén actualizadas.',
+            en: 'Continuous background price monitoring so your alerts are always reliable and up to date.',
+          },
+        },
+        {
+          icon: '\uD83D\uDD0A',
+          title: { es: 'Super Sound Alert', en: 'Super Sound Alert' },
+          description: {
+            es: 'Avisos visuales acompañados de una alarma sonora clara y fácilmente reconocible. Modo Pro para alertas más intensas.',
+            en: 'Visual notifications accompanied by a clear, easily recognizable sound alarm. Pro mode for more intense alerts.',
+          },
+        },
+        {
+          icon: '\u26A1',
+          title: { es: 'Rápida y efectiva', en: 'Fast and Effective' },
+          description: {
+            es: 'Configura alertas en segundos con una interfaz clara e intuitiva, sin configuraciones confusas.',
+            en: 'Set alerts in seconds with a clear, intuitive interface. No confusing settings.',
+          },
+        },
+        {
+          icon: '\uD83D\uDCCF',
+          title: { es: 'Tipos de alerta versátiles', en: 'Versatile Alert Types' },
+          description: {
+            es: 'Umbral fijo (por encima/por debajo) o cambio porcentual (subida/bajada). Tú eliges cómo quieres ser notificado.',
+            en: 'Fixed threshold (above/below) or percentage change (up/down). You choose how you want to be notified.',
+          },
+        },
+        {
+          icon: '\uD83D\uDEE0\uFE0F',
+          title: { es: 'Gestión eficiente', en: 'Efficient Management' },
+          description: {
+            es: 'Pausa, edita, duplica o elimina alertas fácilmente desde un panel central.',
+            en: 'Pause, edit, duplicate or delete alerts easily from a central panel.',
+          },
+        },
+        {
+          icon: '\uD83D\uDCCA',
+          title: { es: 'Cobertura de mercado', en: 'Market Coverage' },
+          description: {
+            es: 'Sigue las 20 criptomonedas más populares, incluyendo Bitcoin, Ethereum y principales altcoins.',
+            en: 'Track the 20 most popular cryptocurrencies, including Bitcoin, Ethereum and major altcoins.',
+          },
+        },
+        {
+          icon: '\u2B50',
+          title: { es: 'Extras opcionales', en: 'Optional Extras' },
+          description: {
+            es: 'Marca tus criptos favoritas y usa el modo día/noche para una experiencia más cómoda.',
+            en: 'Mark your favorite cryptos and use day/night mode for a more comfortable experience.',
+          },
+        },
+      ],
+    },
+    faq: {
+      es: [
+        {
+          question: { es: '¿Es gratis?', en: 'Is it free?' },
+          answer: {
+            es: 'Sí. Simple Crypto Alerts tiene un plan gratuito con Crypto Live Monitor, notificaciones push, sonido estándar, favoritos y modo día/noche.',
+            en: 'Yes. Simple Crypto Alerts has a free plan with Crypto Live Monitor, push notifications, standard sound, favorites and day/night mode.',
+          },
+        },
+        {
+          question: { es: '¿Qué incluye el modo Pro?', en: 'What does Pro mode include?' },
+          answer: {
+            es: 'Hasta 20 alertas activas, Crypto Live Monitor ULTRA en tiempo real, Super Sound Alert, prioridad de notificaciones y rendimiento optimizado.',
+            en: 'Up to 20 active alerts, real-time ULTRA Crypto Live Monitor, Super Sound Alert, notification priority and optimized performance.',
+          },
+        },
+        {
+          question: { es: '¿Funciona con la app cerrada?', en: 'Does it work with the app closed?' },
+          answer: {
+            es: 'Sí. El Crypto Live Monitor ejecuta monitorización continua en segundo plano, incluso con la app cerrada, para que tus alertas siempre estén actualizadas.',
+            en: 'Yes. The Crypto Live Monitor runs continuous background monitoring, even when the app is closed, so your alerts are always up to date.',
+          },
+        },
+        {
+          question: { es: '¿Qué criptomonedas puedo seguir?', en: 'Which cryptocurrencies can I track?' },
+          answer: {
+            es: 'Las 20 criptomonedas más populares del mercado, incluyendo Bitcoin (BTC), Ethereum (ETH) y las principales altcoins.',
+            en: 'The 20 most popular cryptocurrencies on the market, including Bitcoin (BTC), Ethereum (ETH) and major altcoins.',
+          },
+        },
+        {
+          question: { es: '¿Necesito crear cuenta?', en: 'Do I need to create an account?' },
+          answer: {
+            es: 'No. Simple Crypto Alerts funciona sin registro. Descargas, configuras tus alertas y listo.',
+            en: 'No. Simple Crypto Alerts works without registration. Download, set your alerts and you are done.',
+          },
+        },
+        {
+          question: { es: '¿Qué tipos de alerta hay?', en: 'What types of alerts are there?' },
+          answer: {
+            es: 'Dos tipos: umbral fijo (notificarte cuando el precio suba o baje de un valor concreto) y cambio porcentual (notificarte cuando el precio varíe un porcentaje determinado).',
+            en: 'Two types: fixed threshold (notify you when the price goes above or below a specific value) and percentage change (notify you when the price changes by a determined percentage).',
+          },
+        },
+      ],
+      en: [
+        {
+          question: { es: '¿Es gratis?', en: 'Is it free?' },
+          answer: {
+            es: 'Sí. Simple Crypto Alerts tiene un plan gratuito con Crypto Live Monitor, notificaciones push, sonido estándar, favoritos y modo día/noche.',
+            en: 'Yes. Simple Crypto Alerts has a free plan with Crypto Live Monitor, push notifications, standard sound, favorites and day/night mode.',
+          },
+        },
+        {
+          question: { es: '¿Qué incluye el modo Pro?', en: 'What does Pro mode include?' },
+          answer: {
+            es: 'Hasta 20 alertas activas, Crypto Live Monitor ULTRA en tiempo real, Super Sound Alert, prioridad de notificaciones y rendimiento optimizado.',
+            en: 'Up to 20 active alerts, real-time ULTRA Crypto Live Monitor, Super Sound Alert, notification priority and optimized performance.',
+          },
+        },
+        {
+          question: { es: '¿Funciona con la app cerrada?', en: 'Does it work with the app closed?' },
+          answer: {
+            es: 'Sí. El Crypto Live Monitor ejecuta monitorización continua en segundo plano, incluso con la app cerrada, para que tus alertas siempre estén actualizadas.',
+            en: 'Yes. The Crypto Live Monitor runs continuous background monitoring, even when the app is closed, so your alerts are always up to date.',
+          },
+        },
+        {
+          question: { es: '¿Qué criptomonedas puedo seguir?', en: 'Which cryptocurrencies can I track?' },
+          answer: {
+            es: 'Las 20 criptomonedas más populares del mercado, incluyendo Bitcoin (BTC), Ethereum (ETH) y las principales altcoins.',
+            en: 'The 20 most popular cryptocurrencies on the market, including Bitcoin (BTC), Ethereum (ETH) and major altcoins.',
+          },
+        },
+        {
+          question: { es: '¿Necesito crear cuenta?', en: 'Do I need to create an account?' },
+          answer: {
+            es: 'No. Simple Crypto Alerts funciona sin registro. Descargas, configuras tus alertas y listo.',
+            en: 'No. Simple Crypto Alerts works without registration. Download, set your alerts and you are done.',
+          },
+        },
+        {
+          question: { es: '¿Qué tipos de alerta hay?', en: 'What types of alerts are there?' },
+          answer: {
+            es: 'Dos tipos: umbral fijo (notificarte cuando el precio suba o baje de un valor concreto) y cambio porcentual (notificarte cuando el precio varíe un porcentaje determinado).',
+            en: 'Two types: fixed threshold (notify you when the price goes above or below a specific value) and percentage change (notify you when the price changes by a determined percentage).',
+          },
+        },
+      ],
+    },
   },
   {
     id: 'wallapro',

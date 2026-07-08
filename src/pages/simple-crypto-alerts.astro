@@ -1,0 +1,299 @@
+---
+import AppLandingLayout from '../layouts/AppLandingLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import Card from '../components/ui/Card.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import { apps } from '../data/apps';
+
+const sca = apps.find(a => a.id === 'simple-crypto-alerts')!;
+const otherApps = apps.filter(a => a.id !== 'simple-crypto-alerts');
+const features = sca.features!.es;
+const faq = sca.faq!.es;
+---
+
+<AppLandingLayout
+  title="Simple Crypto Alerts"
+  description="Alertas de precio cripto y monitorización en tiempo real. Configura alertas en segundos y deja que la app supervise el mercado por ti."
+  color="gold"
+  technologies={['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API']}
+>
+
+  <!-- ==================== FEATURES ==================== -->
+  <section class="features-section">
+    <SectionHeader
+      number="01."
+      title="Features"
+      subtitle="Todo lo que necesitas para seguir tus criptomonedas"
+    />
+
+    <div class="features-grid">
+      {features.map((feature, i) => (
+        <div class="feature-card" data-animate="fade-up" style={`--stagger-index: ${i}`}>
+          <span class="feature-card__icon" aria-hidden="true">{feature.icon}</span>
+          <h3 class="feature-card__title">{feature.title.es}</h3>
+          <p class="feature-card__desc">{feature.description.es}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ==================== COMPARISON TABLE ==================== -->
+  <section class="comparison-section">
+    <SectionHeader
+      number="02."
+      title="Gratis vs Pro"
+      subtitle="Compara los planes"
+    />
+
+    <div class="comparison-table" data-animate="fade-up">
+      <table>
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th class="col-free">Gratis</th>
+            <th class="col-pro">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Crypto Live Monitor</td>
+            <td class="col-free">Normal</td>
+            <td class="col-pro">ULTRA en tiempo real</td>
+          </tr>
+          <tr>
+            <td>Alertas activas</td>
+            <td class="col-free">\u2014</td>
+            <td class="col-pro">Hasta 20</td>
+          </tr>
+          <tr>
+            <td>Notificaciones push</td>
+            <td class="col-free">\u2713</td>
+            <td class="col-pro">\u2713 + Prioridad</td>
+          </tr>
+          <tr>
+            <td>Super Sound Alert</td>
+            <td class="col-free">\u2717</td>
+            <td class="col-pro">\u2713</td>
+          </tr>
+          <tr>
+            <td>Favoritos</td>
+            <td class="col-free">\u2713</td>
+            <td class="col-pro">\u2713</td>
+          </tr>
+          <tr>
+            <td>Modo día/noche</td>
+            <td class="col-free">\u2713</td>
+            <td class="col-pro">\u2713</td>
+          </tr>
+          <tr>
+            <td>Rendimiento optimizado</td>
+            <td class="col-free">\u2717</td>
+            <td class="col-pro">\u2713</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="faq-section">
+    <SectionHeader
+      number="03."
+      title="Preguntas frecuentes"
+      subtitle="Resolvemos tus dudas"
+    />
+
+    <div data-animate="fade-up">
+      <FAQ items={faq} />
+    </div>
+  </section>
+
+  <!-- ==================== OTHER APPS ==================== -->
+  <section class="other-apps-section">
+    <SectionHeader
+      number="04."
+      title="Otras apps"
+      subtitle="Descubre nuestras otras aplicaciones"
+    />
+
+    <div class="other-apps-grid">
+      {otherApps.map((app, i) => (
+        <div data-animate="fade-up" style={`--stagger-index: ${i}`}>
+          <Card variant="featured" href={`/${app.slug}`} tag="app">
+            <div class="other-app-card">
+              <span class="other-app-card__icon" aria-hidden="true">{app.icon}</span>
+              <h3 class="other-app-card__title">{app.name}</h3>
+              <p class="other-app-card__subtitle">{app.tagline.es}</p>
+            </div>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</AppLandingLayout>
+
+<style>
+  section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    position: relative;
+  }
+
+  /* ==================== FEATURES GRID ==================== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .feature-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-border-accent);
+    transform: translateY(-2px);
+  }
+
+  .feature-card__icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .feature-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .feature-card__desc {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ==================== COMPARISON TABLE ==================== */
+  .comparison-table {
+    overflow-x: auto;
+  }
+
+  .comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--space-md) var(--space-lg);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .comparison-table th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .comparison-table td {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  .comparison-table td:first-child {
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .comparison-table .col-free {
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .comparison-table .col-pro {
+    color: var(--color-accent-primary);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .comparison-table th.col-free,
+  .comparison-table th.col-pro {
+    text-align: center;
+  }
+
+  /* ==================== FAQ ==================== */
+  .faq-section {
+    max-width: 700px;
+  }
+
+  /* ==================== OTHER APPS ==================== */
+  .other-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .other-app-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .other-app-card__icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .other-app-card__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .other-app-card__subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  :global(.card:hover) .other-app-card__title {
+    color: var(--color-accent-primary);
+  }
+
+  @media (max-width: 640px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.8rem;
+    }
+
+    .other-apps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

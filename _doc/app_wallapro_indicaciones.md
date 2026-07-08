@@ -100,7 +100,7 @@ Coleccionista	"Encuentra piezas difíciles al precio justo."
 Revendedor	"Stock ilimitado de oportunidades."
 Usuario casual	"Gratis. Configura en 1 minuto."
 7. Llamadas a la acción (CTAs)
-- "Empieza a cazar chollos"
+- "Empieza a cazar chollos".
 - "Descargar WallaPro"
 - "Activar Ultra"
 - "Probar gratis" (con límites free)

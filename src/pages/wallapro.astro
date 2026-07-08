@@ -136,6 +136,11 @@ const faq = wallapro.faq!.es;
     </div>
   </section>
 
+  <!-- ==================== PRIVACY ==================== -->
+  <div class="privacy-link">
+    <a href="/privacy/wallapro">Privacy Policy</a>
+  </div>
+
 </AppLandingLayout>
 
 <style>
@@ -284,6 +289,24 @@ const faq = wallapro.faq!.es;
 
   :global(.card:hover) .other-app-card__title {
     color: var(--color-accent-primary);
+  }
+
+  .privacy-link {
+    text-align: center;
+    padding: var(--space-2xl) 0;
+  }
+
+  .privacy-link a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+  }
+
+  .privacy-link a:hover {
+    color: var(--color-text-secondary);
   }
 
   @media (max-width: 640px) {

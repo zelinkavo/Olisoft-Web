@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy - WallaPro"
+  description="Privacy Policy for WallaPro app by OliSoft."
+  includeNav={false}
+>
+  <article class="privacy">
+    <div class="privacy__container">
+      <nav class="privacy__nav" aria-label="Breadcrumb">
+        <a href="/wallapro" class="back-link">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          WallaPro
+        </a>
+      </nav>
+
+      <h1 class="privacy__title">Privacy Policy for WallaPro</h1>
+      <p class="privacy__date"><strong>Last updated:</strong> 08-07-2026</p>
+
+      <h2>1. Introduction</h2>
+      <p>Your privacy is important to us. This Privacy Policy explains how the WallaPro app (the "App"), developed by OliSoft, manages user data — or more precisely, does not collect any.</p>
+
+      <h2>2. No Data Collection</h2>
+      <p>The App does <strong>not collect</strong>, <strong>store</strong>, <strong>transmit</strong>, or <strong>share</strong> any personal data, device data, or usage data from users.</p>
+      <p>No account creation, login, or personal information is required to use the App.</p>
+
+      <h2>3. No Third-Party Services</h2>
+      <p>The App does not use analytics tools, advertising networks, tracking libraries, or third-party SDKs that collect or transmit data.</p>
+
+      <h2>4. No Sensitive Permissions</h2>
+      <p>The App does not access sensitive data such as location, contacts, camera, files, or device identifiers.</p>
+
+      <h2>5. Developer Contact</h2>
+      <p>If you have any questions regarding this Privacy Policy, please contact:</p>
+      <p>
+        <strong>Developer:</strong> OliSoft<br>
+        <strong>Email:</strong> <a href="mailto:olisoft.apps@gmail.com">olisoft.apps@gmail.com</a>
+      </p>
+
+      <h2>6. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this same page. Continued use of the App after changes constitutes acceptance of the updated policy.</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .privacy {
+    padding-top: calc(var(--nav-height) + var(--space-3xl));
+    padding-bottom: var(--space-4xl);
+    min-height: 100dvh;
+  }
+
+  .privacy__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+  }
+
+  .privacy__nav {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .privacy__title {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .privacy__date {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  :global(.privacy h2) {
+    font-size: 1.15rem;
+    color: var(--color-text-primary);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  :global(.privacy p) {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  :global(.privacy a) {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  :global(.privacy a:hover) {
+    color: var(--color-accent-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .privacy__container {
+      padding: 0 var(--space-md);
+    }
+  }
+</style>

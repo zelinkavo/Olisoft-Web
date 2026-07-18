@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://olisoft-apps.pages.dev',
+  site: 'https://olisoft.pages.dev',
 
   integrations: [
     react(),

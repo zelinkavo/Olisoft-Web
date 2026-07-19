@@ -442,6 +442,13 @@ export const apps: App[] = [
     faq: {
       es: [
         {
+          question: { es: '¿Es una aplicación oficial de Wallapop?', en: 'Is it an official Wallapop app?' },
+          answer: {
+            es: '<p>No. WallaPro <strong>no es una aplicación oficial</strong> de Wallapop. Es una herramienta independiente desarrollada por OliSoft APPs que te ayuda a encontrar productos en Wallapop de forma más eficiente.</p><p>No está afiliada, patrocinada ni aprobada por Wallapop. Simplemente aprovecha la información pública disponible para facilitarte la búsqueda de gangas.</p>',
+            en: '<p>No. WallaPro is <strong>not an official application</strong> of Wallapop. It is an independent tool developed by OliSoft APPs that helps you find products on Wallapop more efficiently.</p><p>It is not affiliated with, sponsored by, or approved by Wallapop. It simply takes advantage of publicly available information to help you find deals more easily.</p>',
+          },
+        },
+        {
           question: { es: '¿Es gratis?', en: 'Is it free?' },
           answer: {
             es: '<p>Sí. WallaPro tiene un plan <strong>Free</strong> completamente funcional con:</p><ul><li><strong>2 búsquedas inteligentes</strong> activas simultáneamente</li><li><strong>10 capturas</strong> en el feed</li><li><strong>2 watchlist</strong> de seguimiento de precios</li><li>Escaneo cada <strong>60 minutos</strong></li></ul><p>Además, puedes ganar puntos viendo vídeos para desbloquear límites extra sin pagar nada. Si necesitas más potencia, el modo <strong>Ultra</strong> es un pago único que elimina todas las restricciones.</p>',
@@ -458,8 +465,8 @@ export const apps: App[] = [
         {
           question: { es: '¿Necesito cuenta de Wallapop?', en: 'Do I need a Wallapop account?' },
           answer: {
-            es: '<p>No. WallaPro funciona directamente contra la API pública de Wallapop. No necesitas registrarte ni iniciar sesión en Wallapop para usar la app.</p><p>Toda la configuración se almacena localmente en tu dispositivo. Tu privacidad está protegida: no se recogen datos personales ni credenciales.</p>',
-            en: '<p>No. WallaPro works directly against Wallapop\'s public API. You don\'t need to sign up or log in to Wallapop to use the app.</p><p>All configuration is stored locally on your device. Your privacy is protected: no personal data or credentials are collected.</p>',
+            es: '<p>No. WallaPro funciona sin necesidad de registrarte ni iniciar sesión en Wallapop para usar la app.</p><p>Toda la configuración se almacena localmente en tu dispositivo. Tu privacidad está protegida: no se recogen datos personales ni credenciales.</p>',
+            en: '<p>No. WallaPro works without requiring you to sign up or log in to Wallapop to use the app.</p><p>All configuration is stored locally on your device. Your privacy is protected: no personal data or credentials are collected.</p>',
           },
         },
         {
@@ -486,8 +493,8 @@ export const apps: App[] = [
         {
           question: { es: '¿Cómo funciona el escaneo en segundo plano?', en: 'How does background scanning work?' },
           answer: {
-            es: '<p>WallaPro utiliza un <strong>servicio foreground nativo de Android</strong> (implementado en Kotlin con AlarmManager) que ejecuta las búsquedas periódicamente incluso con la app cerrada.</p><p>Características técnicas:</p><ul><li><strong>Intervalo Free:</strong> cada 60 minutos</li><li><strong>Intervalo Ultra:</strong> desde 5 minutos</li><li><strong>Jitter anti-detección:</strong> los intervalos varían ligeramente para parecer tráfico humano</li><li><strong>Barajado de alertas:</strong> las notificaciones se distribuyen para evitar picos</li><li>El servicio se muestra como una notificación persistente, lo que evita que Android lo detenga</li></ul>',
-            en: '<p>WallaPro uses a <strong>native Android foreground service</strong> (implemented in Kotlin with AlarmManager) that runs searches periodically even when the app is closed.</p><p>Technical features:</p><ul><li><strong>Free interval:</strong> every 60 minutes</li><li><strong>Ultra interval:</strong> from 5 minutes</li><li><strong>Anti-detection jitter:</strong> intervals vary slightly to mimic human traffic</li><li><strong>Alert shuffling:</strong> notifications are distributed to avoid spikes</li><li>The service shows as a persistent notification, preventing Android from stopping it</li></ul>',
+            es: '<p>WallaPro es capaz de escanear Wallapop periódicamente aunque tengas la app cerrada. Tú configuras las búsquedas una vez y la app se encarga del resto.</p><p>Los intervalos de escaneo son:</p><ul><li><strong>Plan Free:</strong> cada 60 minutos</li><li><strong>Plan Ultra:</strong> desde 5 minutos</li></ul><p>Cuando encuentra resultados nuevos que coinciden con tus búsquedas, te envía una notificación al instante. Así no tienes que estar pendiente de la app.</p>',
+            en: '<p>WallaPro can scan Wallapop periodically even when the app is closed. You set up your searches once and the app handles the rest.</p><p>Scan intervals are:</p><ul><li><strong>Free plan:</strong> every 60 minutes</li><li><strong>Ultra plan:</strong> from 5 minutes</li></ul><p>When it finds new results matching your searches, it sends you an instant notification. You don\'t have to keep checking the app.</p>',
           },
         },
         {
@@ -500,15 +507,15 @@ export const apps: App[] = [
         {
           question: { es: '¿Consume mucha batería?', en: 'Does it drain the battery?' },
           answer: {
-            es: '<p>WallaPro está optimizado para minimizar el consumo de batería:</p><ul><li>Usa <strong>AlarmManager</strong> de Android, que programa tareas sin mantener la CPU activa continuamente</li><li>Las peticiones a la API se realizan en ráfagas cortas y eficientes</li><li>El intervalo de 60 minutos en Free apenas tiene impacto en la batería diaria</li><li>El servicio foreground tiene bajo overhead y Android lo gestiona eficientemente</li></ul><p>En términos reales, el impacto es similar al de cualquier app de notificaciones: negligible en uso normal.</p>',
-            en: '<p>WallaPro is optimized to minimize battery consumption:</p><ul><li>Uses Android\'s <strong>AlarmManager</strong>, which schedules tasks without keeping the CPU constantly active</li><li>API requests are made in short, efficient bursts</li><li>The 60-minute Free interval has barely any impact on daily battery life</li><li>The foreground service has low overhead and Android manages it efficiently</li></ul><p>In real terms, the impact is similar to any notification app: negligible during normal use.</p>',
+            es: '<p>No. WallaPro está diseñado para consumir lo mínimo. Las búsquedas se realizan en intervalos espaciados y el sistema operativo gestiona los recursos de forma eficiente.</p><p>Con el plan Free (cada 60 minutos), el impacto en la batería es prácticamente imperceptible. Con Ultra (desde 5 minutos) el consumo es mayor, pero sigue siendo moderado para el uso que se le da.</p><p>En la práctica, funciona como cualquier app de notificaciones: no notarás la diferencia en tu día a día.</p>',
+            en: '<p>No. WallaPro is designed to consume as little battery as possible. Searches run at spaced intervals and the operating system manages resources efficiently.</p><p>With the Free plan (every 60 minutes), battery impact is virtually imperceptible. With Ultra (from 5 minutes) consumption is higher, but still moderate for the functionality it provides.</p><p>In practice, it works like any notification app: you won\'t notice the difference in your daily use.</p>',
           },
         },
         {
           question: { es: '¿Puedo configurar la ubicación?', en: 'Can I configure the location?' },
           answer: {
-            es: '<p>Sí. WallaPro te permite controlar la ubicación de tus búsquedas de varias formas:</p><ul><li><strong>Ubicación actual:</strong> usa el GPS de tu dispositivo para buscar cerca de ti</li><li><strong>Coordenadas manuales:</strong> introduce latitud y longitud para acotar a una zona concreta</li><li><strong>Por defecto:</strong> si no configuras nada, la app resuelve la ubicación aproximada por IP</li></ul><p>Esto es especialmente útil para búsquedas de segunda mano donde la cercanía importa: muebles, coches, inmuebles, etc.</p>',
-            en: '<p>Yes. WallaPro lets you control the location of your searches in several ways:</p><ul><li><strong>Current location:</strong> uses your device\'s GPS to search near you</li><li><strong>Manual coordinates:</strong> enter latitude and longitude to target a specific area</li><li><strong>Default:</strong> if you don\'t configure anything, the app resolves approximate location by IP</li></ul><p>This is especially useful for second-hand searches where proximity matters: furniture, cars, real estate, etc.</p>',
+            es: '<p>Sí. WallaPro te permite controlar la ubicación de tus búsquedas de dos formas:</p><ul><li><strong>Automática:</strong> si no configuras nada, la app resuelve la ubicación aproximada por IP</li><li><strong>Manual:</strong> introduce el nombre de una ciudad o zona para acotar los resultados a esa ubicación</li></ul><p>Esto es especialmente útil para búsquedas de segunda mano donde la cercanía importa: muebles, coches, inmuebles, etc.</p>',
+            en: '<p>Yes. WallaPro lets you control the location of your searches in two ways:</p><ul><li><strong>Automatic:</strong> if you don\'t configure anything, the app resolves approximate location by IP</li><li><strong>Manual:</strong> enter a city or area name to narrow results to that location</li></ul><p>This is especially useful for second-hand searches where proximity matters: furniture, cars, real estate, etc.</p>',
           },
         },
         {
@@ -521,6 +528,13 @@ export const apps: App[] = [
       ],
       en: [
         {
+          question: { es: '¿Es una aplicación oficial de Wallapop?', en: 'Is it an official Wallapop app?' },
+          answer: {
+            es: '<p>No. WallaPro <strong>no es una aplicación oficial</strong> de Wallapop. Es una herramienta independiente desarrollada por OliSoft APPs que te ayuda a encontrar productos en Wallapop de forma más eficiente.</p><p>No está afiliada, patrocinada ni aprobada por Wallapop. Simplemente aprovecha la información pública disponible para facilitarte la búsqueda de gangas.</p>',
+            en: '<p>No. WallaPro is <strong>not an official application</strong> of Wallapop. It is an independent tool developed by OliSoft APPs that helps you find products on Wallapop more efficiently.</p><p>It is not affiliated with, sponsored by, or approved by Wallapop. It simply takes advantage of publicly available information to help you find deals more easily.</p>',
+          },
+        },
+        {
           question: { es: '¿Es gratis?', en: 'Is it free?' },
           answer: {
             es: '<p>Sí. WallaPro tiene un plan <strong>Free</strong> completamente funcional con:</p><ul><li><strong>2 búsquedas inteligentes</strong> activas simultáneamente</li><li><strong>10 capturas</strong> en el feed</li><li><strong>2 watchlist</strong> de seguimiento de precios</li><li>Escaneo cada <strong>60 minutos</strong></li></ul><p>Además, puedes ganar puntos viendo vídeos para desbloquear límites extra sin pagar nada. Si necesitas más potencia, el modo <strong>Ultra</strong> es un pago único que elimina todas las restricciones.</p>',
@@ -537,8 +551,8 @@ export const apps: App[] = [
         {
           question: { es: '¿Necesito cuenta de Wallapop?', en: 'Do I need a Wallapop account?' },
           answer: {
-            es: '<p>No. WallaPro funciona directamente contra la API pública de Wallapop. No necesitas registrarte ni iniciar sesión en Wallapop para usar la app.</p><p>Toda la configuración se almacena localmente en tu dispositivo. Tu privacidad está protegida: no se recogen datos personales ni credenciales.</p>',
-            en: '<p>No. WallaPro works directly against Wallapop\'s public API. You don\'t need to sign up or log in to Wallapop to use the app.</p><p>All configuration is stored locally on your device. Your privacy is protected: no personal data or credentials are collected.</p>',
+            es: '<p>No. WallaPro funciona sin necesidad de registrarte ni iniciar sesión en Wallapop para usar la app.</p><p>Toda la configuración se almacena localmente en tu dispositivo. Tu privacidad está protegida: no se recogen datos personales ni credenciales.</p>',
+            en: '<p>No. WallaPro works without requiring you to sign up or log in to Wallapop to use the app.</p><p>All configuration is stored locally on your device. Your privacy is protected: no personal data or credentials are collected.</p>',
           },
         },
         {
@@ -565,8 +579,8 @@ export const apps: App[] = [
         {
           question: { es: '¿Cómo funciona el escaneo en segundo plano?', en: 'How does background scanning work?' },
           answer: {
-            es: '<p>WallaPro utiliza un <strong>servicio foreground nativo de Android</strong> (implementado en Kotlin con AlarmManager) que ejecuta las búsquedas periódicamente incluso con la app cerrada.</p><p>Características técnicas:</p><ul><li><strong>Intervalo Free:</strong> cada 60 minutos</li><li><strong>Intervalo Ultra:</strong> desde 5 minutos</li><li><strong>Jitter anti-detección:</strong> los intervalos varían ligeramente para parecer tráfico humano</li><li><strong>Barajado de alertas:</strong> las notificaciones se distribuyen para evitar picos</li><li>El servicio se muestra como una notificación persistente, lo que evita que Android lo detenga</li></ul>',
-            en: '<p>WallaPro uses a <strong>native Android foreground service</strong> (implemented in Kotlin with AlarmManager) that runs searches periodically even when the app is closed.</p><p>Technical features:</p><ul><li><strong>Free interval:</strong> every 60 minutes</li><li><strong>Ultra interval:</strong> from 5 minutes</li><li><strong>Anti-detection jitter:</strong> intervals vary slightly to mimic human traffic</li><li><strong>Alert shuffling:</strong> notifications are distributed to avoid spikes</li><li>The service shows as a persistent notification, preventing Android from stopping it</li></ul>',
+            es: '<p>WallaPro es capaz de escanear Wallapop periódicamente aunque tengas la app cerrada. Tú configuras las búsquedas una vez y la app se encarga del resto.</p><p>Los intervalos de escaneo son:</p><ul><li><strong>Plan Free:</strong> cada 60 minutos</li><li><strong>Plan Ultra:</strong> desde 5 minutos</li></ul><p>Cuando encuentra resultados nuevos que coinciden con tus búsquedas, te envía una notificación al instante. Así no tienes que estar pendiente de la app.</p>',
+            en: '<p>WallaPro can scan Wallapop periodically even when the app is closed. You set up your searches once and the app handles the rest.</p><p>Scan intervals are:</p><ul><li><strong>Free plan:</strong> every 60 minutes</li><li><strong>Ultra plan:</strong> from 5 minutes</li></ul><p>When it finds new results matching your searches, it sends you an instant notification. You don\'t have to keep checking the app.</p>',
           },
         },
         {
@@ -579,15 +593,15 @@ export const apps: App[] = [
         {
           question: { es: '¿Consume mucha batería?', en: 'Does it drain the battery?' },
           answer: {
-            es: '<p>WallaPro está optimizado para minimizar el consumo de batería:</p><ul><li>Usa <strong>AlarmManager</strong> de Android, que programa tareas sin mantener la CPU activa continuamente</li><li>Las peticiones a la API se realizan en ráfagas cortas y eficientes</li><li>El intervalo de 60 minutos en Free apenas tiene impacto en la batería diaria</li><li>El servicio foreground tiene bajo overhead y Android lo gestiona eficientemente</li></ul><p>En términos reales, el impacto es similar al de cualquier app de notificaciones: negligible en uso normal.</p>',
-            en: '<p>WallaPro is optimized to minimize battery consumption:</p><ul><li>Uses Android\'s <strong>AlarmManager</strong>, which schedules tasks without keeping the CPU constantly active</li><li>API requests are made in short, efficient bursts</li><li>The 60-minute Free interval has barely any impact on daily battery life</li><li>The foreground service has low overhead and Android manages it efficiently</li></ul><p>In real terms, the impact is similar to any notification app: negligible during normal use.</p>',
+            es: '<p>No. WallaPro está diseñado para consumir lo mínimo. Las búsquedas se realizan en intervalos espaciados y el sistema operativo gestiona los recursos de forma eficiente.</p><p>Con el plan Free (cada 60 minutos), el impacto en la batería es prácticamente imperceptible. Con Ultra (desde 5 minutos) el consumo es mayor, pero sigue siendo moderado para el uso que se le da.</p><p>En la práctica, funciona como cualquier app de notificaciones: no notarás la diferencia en tu día a día.</p>',
+            en: '<p>No. WallaPro is designed to consume as little battery as possible. Searches run at spaced intervals and the operating system manages resources efficiently.</p><p>With the Free plan (every 60 minutes), battery impact is virtually imperceptible. With Ultra (from 5 minutes) consumption is higher, but still moderate for the functionality it provides.</p><p>In practice, it works like any notification app: you won\'t notice the difference in your daily use.</p>',
           },
         },
         {
           question: { es: '¿Puedo configurar la ubicación?', en: 'Can I configure the location?' },
           answer: {
-            es: '<p>Sí. WallaPro te permite controlar la ubicación de tus búsquedas de varias formas:</p><ul><li><strong>Ubicación actual:</strong> usa el GPS de tu dispositivo para buscar cerca de ti</li><li><strong>Coordenadas manuales:</strong> introduce latitud y longitud para acotar a una zona concreta</li><li><strong>Por defecto:</strong> si no configuras nada, la app resuelve la ubicación aproximada por IP</li></ul><p>Esto es especialmente útil para búsquedas de segunda mano donde la cercanía importa: muebles, coches, inmuebles, etc.</p>',
-            en: '<p>Yes. WallaPro lets you control the location of your searches in several ways:</p><ul><li><strong>Current location:</strong> uses your device\'s GPS to search near you</li><li><strong>Manual coordinates:</strong> enter latitude and longitude to target a specific area</li><li><strong>Default:</strong> if you don\'t configure anything, the app resolves approximate location by IP</li></ul><p>This is especially useful for second-hand searches where proximity matters: furniture, cars, real estate, etc.</p>',
+            es: '<p>Sí. WallaPro te permite controlar la ubicación de tus búsquedas de dos formas:</p><ul><li><strong>Automática:</strong> si no configuras nada, la app resuelve la ubicación aproximada por IP</li><li><strong>Manual:</strong> introduce el nombre de una ciudad o zona para acotar los resultados a esa ubicación</li></ul><p>Esto es especialmente útil para búsquedas de segunda mano donde la cercanía importa: muebles, coches, inmuebles, etc.</p>',
+            en: '<p>Yes. WallaPro lets you control the location of your searches in two ways:</p><ul><li><strong>Automatic:</strong> if you don\'t configure anything, the app resolves approximate location by IP</li><li><strong>Manual:</strong> enter a city or area name to narrow results to that location</li></ul><p>This is especially useful for second-hand searches where proximity matters: furniture, cars, real estate, etc.</p>',
           },
         },
         {

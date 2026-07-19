@@ -8,7 +8,10 @@ import { apps } from '../data/apps';
 const sca = apps.find(a => a.id === 'simple-crypto-alerts')!;
 const otherApps = apps.filter(a => a.id !== 'simple-crypto-alerts');
 const features = sca.features!.es;
-const faq = sca.faq!.es;
+const faq = sca.faq!.es.map(item => ({
+  question: item.question.es,
+  answer: item.answer.es,
+}));
 ---
 
 <AppLandingLayout
@@ -16,6 +19,7 @@ const faq = sca.faq!.es;
   description="Alertas de precio cripto y monitorización en tiempo real. Configura alertas en segundos y deja que la app supervise el mercado por ti."
   color="gold"
   technologies={['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API']}
+  googlePlayUrl={sca.googlePlayUrl}
 >
 
   <!-- ==================== FEATURES ==================== -->
@@ -67,28 +71,28 @@ const faq = sca.faq!.es;
           </tr>
           <tr>
             <td>Notificaciones push</td>
-            <td class="col-free">\u2713</td>
-            <td class="col-pro">\u2713 + Prioridad</td>
+            <td class="col-free">✓</td>
+            <td class="col-pro">✓ + Prioridad</td>
           </tr>
           <tr>
             <td>Super Sound Alert</td>
-            <td class="col-free">\u2717</td>
-            <td class="col-pro">\u2713</td>
+            <td class="col-free">✗</td>
+            <td class="col-pro">✓</td>
           </tr>
           <tr>
             <td>Favoritos</td>
-            <td class="col-free">\u2713</td>
-            <td class="col-pro">\u2713</td>
+            <td class="col-free">✓</td>
+            <td class="col-pro">✓</td>
           </tr>
           <tr>
             <td>Modo día/noche</td>
-            <td class="col-free">\u2713</td>
-            <td class="col-pro">\u2713</td>
+            <td class="col-free">✓</td>
+            <td class="col-pro">✓</td>
           </tr>
           <tr>
             <td>Rendimiento optimizado</td>
-            <td class="col-free">\u2717</td>
-            <td class="col-pro">\u2713</td>
+            <td class="col-free">✗</td>
+            <td class="col-pro">✓</td>
           </tr>
         </tbody>
       </table>

@@ -8,7 +8,10 @@ import { apps } from '../data/apps';
 const wallapro = apps.find(a => a.id === 'wallapro')!;
 const otherApps = apps.filter(a => a.id !== 'wallapro');
 const features = wallapro.features!.es;
-const faq = wallapro.faq!.es;
+const faq = wallapro.faq!.es.map(item => ({
+  question: item.question.es,
+  answer: item.answer.es,
+}));
 ---
 
 <AppLandingLayout
@@ -16,6 +19,7 @@ const faq = wallapro.faq!.es;
   description="Sniper inteligente para Wallapop. Escanea en segundo plano, encuentra chollos antes que nadie y te notifica al instante."
   color="teal"
   technologies={['React Native', 'Expo', 'TypeScript', 'Kotlin', 'SQLite']}
+  googlePlayUrl={wallapro.googlePlayUrl}
 >
 
   <!-- ==================== FEATURES ==================== -->
@@ -77,23 +81,23 @@ const faq = wallapro.faq!.es;
           </tr>
           <tr>
             <td>Filtros de texto</td>
-            <td class="col-free">\u2717</td>
-            <td class="col-ultra">\u2713</td>
+            <td class="col-free">✗</td>
+            <td class="col-ultra">✓</td>
           </tr>
           <tr>
             <td>Notificaciones separadas</td>
-            <td class="col-free">\u2717</td>
-            <td class="col-ultra">\u2713</td>
+            <td class="col-free">✗</td>
+            <td class="col-ultra">✓</td>
           </tr>
           <tr>
             <td>Sonido extra</td>
-            <td class="col-free">\u2717</td>
-            <td class="col-ultra">\u2713</td>
+            <td class="col-free">✗</td>
+            <td class="col-ultra">✓</td>
           </tr>
           <tr>
             <td>Sin anuncios</td>
-            <td class="col-free">\u2717</td>
-            <td class="col-ultra">\u2713</td>
+            <td class="col-free">✗</td>
+            <td class="col-ultra">✓</td>
           </tr>
         </tbody>
       </table>

@@ -1,10 +1,4 @@
 ---
-/**
- * FAQ.astro — Accordion FAQ component
- *
- * Pure HTML/CSS using <details>/<summary>.
- * Zero client JS required.
- */
 interface FAQItem {
   question: string;
   answer: string;
@@ -28,9 +22,7 @@ const { items } = Astro.props;
           </svg>
         </span>
       </summary>
-      <div class="faq__answer">
-        <p>{item.answer}</p>
-      </div>
+      <div class="faq__answer" set:html={item.answer} />
     </details>
   ))}
 </div>
@@ -106,7 +98,38 @@ const { items } = Astro.props;
     font-size: 0.95rem;
     color: var(--color-text-secondary);
     line-height: 1.7;
-    margin: 0;
+    margin: 0 0 0.75rem;
+  }
+
+  .faq__answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq__answer ul,
+  .faq__answer ol {
+    margin: 0 0 0.75rem;
+    padding-left: 1.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .faq__answer ul:last-child,
+  .faq__answer ol:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq__answer li {
+    margin-bottom: 0.4rem;
+  }
+
+  .faq__answer li:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq__answer strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
   }
 
   @keyframes faqSlideDown {

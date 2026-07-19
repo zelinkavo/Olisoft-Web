@@ -302,7 +302,7 @@ export const apps: App[] = [
       en: 'Scan Wallapop in the background, find deals before anyone else, and get notified instantly.',
     },
     icon: '\uD83C\uDFAF',
-    googlePlayUrl: '',
+    googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.wallapro.app',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Kotlin', 'SQLite'],
     color: '#5bb8a6',
     features: {
@@ -444,50 +444,78 @@ export const apps: App[] = [
         {
           question: { es: '¿Es gratis?', en: 'Is it free?' },
           answer: {
-            es: 'Sí. WallaPro tiene un modo free con 2 búsquedas, 10 capturas y 2 watchlist. Puedes ganar puntos viendo vídeos para desbloquear más límites sin pagar.',
-            en: 'Yes. WallaPro has a free mode with 2 searches, 10 captures and 2 watchlist. You can earn points watching videos to unlock more limits without paying.',
-          },
-        },
-        {
-          question: { es: '¿Necesito cuenta de Wallapop?', en: 'Do I need a Wallapop account?' },
-          answer: {
-            es: 'No. WallaPro funciona directamente contra la API pública de Wallapop. No necesitas registrarte ni iniciar sesión en Wallapop para usar la app.',
-            en: 'No. WallaPro works directly against Wallapop\'s public API. You don\'t need to sign up or log in to Wallapop to use the app.',
-          },
-        },
-        {
-          question: { es: '¿Me pueden banear de Wallapop?', en: 'Can I get banned from Wallapop?' },
-          answer: {
-            es: 'WallaPro usa la API oficial de Wallapop con User-Agent dinámico, jitter anti-detección y rate limiting natural. No realiza scraping web y cumple con los patrones de tráfico de una app normal.',
-            en: 'WallaPro uses Wallapop\'s official API with dynamic User-Agent, anti-detection jitter and natural rate limiting. It doesn\'t do web scraping and follows normal traffic patterns.',
+            es: '<p>Sí. WallaPro tiene un plan <strong>Free</strong> completamente funcional con:</p><ul><li><strong>2 búsquedas inteligentes</strong> activas simultáneamente</li><li><strong>10 capturas</strong> en el feed</li><li><strong>2 watchlist</strong> de seguimiento de precios</li><li>Escaneo cada <strong>60 minutos</strong></li></ul><p>Además, puedes ganar puntos viendo vídeos para desbloquear límites extra sin pagar nada. Si necesitas más potencia, el modo <strong>Ultra</strong> es un pago único que elimina todas las restricciones.</p>',
+            en: '<p>Yes. WallaPro has a fully functional <strong>Free</strong> plan with:</p><ul><li><strong>2 smart searches</strong> active simultaneously</li><li><strong>10 captures</strong> in the feed</li><li><strong>2 price watchlists</strong></li><li>Scanning every <strong>60 minutes</strong></li></ul><p>Plus, you can earn points by watching videos to unlock extra limits at no cost. If you need more power, the <strong>Ultra</strong> mode is a one-time purchase that removes all restrictions.</p>',
           },
         },
         {
           question: { es: '¿Qué incluye el modo Ultra?', en: 'What does Ultra mode include?' },
           answer: {
-            es: 'Pago único con límites desbloqueados: 20 búsquedas, 500 capturas, 15 watchlist, intervalos de hasta 5 minutos, filtros de texto, notificaciones avanzadas y sin anuncios.',
-            en: 'One-time payment with unlocked limits: 20 searches, 500 captures, 15 watchlist, intervals down to 5 minutes, text filters, advanced notifications and no ads.',
+            es: '<p><strong>Ultra</strong> es un pago único (no suscripción) que desbloquea todos los límites:</p><ul><li><strong>20 búsquedas</strong> activas</li><li><strong>500 capturas</strong> en el feed</li><li><strong>15 watchlist</strong> de precios</li><li>Intervalos de escaneo de hasta <strong>5 minutos</strong></li><li><strong>Filtros de texto</strong> (palabras prohibidas y obligadas)</li><li><strong>Notificaciones avanzadas</strong> con sonidos personalizados</li><li><strong>Sin anuncios</strong></li></ul><p>Una vez comprado, es tuyo para siempre. No hay suscripciones ni pagos recurrentes.</p>',
+            en: '<p><strong>Ultra</strong> is a one-time payment (not a subscription) that unlocks all limits:</p><ul><li><strong>20 searches</strong> active</li><li><strong>500 captures</strong> in the feed</li><li><strong>15 price watchlists</strong></li><li>Scan intervals down to <strong>5 minutes</strong></li><li><strong>Text filters</strong> (prohibited and required words)</li><li><strong>Advanced notifications</strong> with custom sounds</li><li><strong>No ads</strong></li></ul><p>Once purchased, it\'s yours forever. No subscriptions or recurring payments.</p>',
           },
         },
         {
-          question: { es: '¿Funciona en iOS?', en: 'Does it work on iOS?' },
+          question: { es: '¿Necesito cuenta de Wallapop?', en: 'Do I need a Wallapop account?' },
           answer: {
-            es: 'De momento WallaPro está disponible solo en Android. iOS y web están en la roadmap pero no hay fecha confirmada.',
-            en: 'For now WallaPro is only available on Android. iOS and web are on the roadmap but there is no confirmed date.',
+            es: '<p>No. WallaPro funciona directamente contra la API pública de Wallapop. No necesitas registrarte ni iniciar sesión en Wallapop para usar la app.</p><p>Toda la configuración se almacena localmente en tu dispositivo. Tu privacidad está protegida: no se recogen datos personales ni credenciales.</p>',
+            en: '<p>No. WallaPro works directly against Wallapop\'s public API. You don\'t need to sign up or log in to Wallapop to use the app.</p><p>All configuration is stored locally on your device. Your privacy is protected: no personal data or credentials are collected.</p>',
+          },
+        },
+        {
+          question: { es: '¿Cómo configuro una búsqueda inteligente?', en: 'How do I set up a smart search?' },
+          answer: {
+            es: '<p>Es muy sencillo. Desde la pantalla principal pulsa <strong>\"Nueva búsqueda\"</strong> y configura:</p><ul><li><strong>Palabras clave:</strong> lo que quieres encontrar (ej. \"iPhone 15\", \"Mesa comedor\")</li><li><strong>Categoría:</strong> elige entre las categorías de Wallapop (electrónica, motor, inmobiliaria, etc.)</li><li><strong>Precio mínimo y máximo:</strong> para acotar los resultados</li><li><strong>Ubicación:</strong> usa tu ubicación actual o introduce coordenadas manuales</li><li><strong>Filtros dinámicos:</strong> según la categoría aparecen filtros específicos (año, km, metros, etc.)</li><li><strong>Filtros de texto:</strong> palabras prohibidas y obligadas (solo Ultra)</li></ul><p>También puedes importar una URL de Wallapop directamente para crear la búsqueda automáticamente.</p>',
+            en: '<p>It\'s very simple. From the main screen tap <strong>\"New search\"</strong> and configure:</p><ul><li><strong>Keywords:</strong> what you want to find (e.g. \"iPhone 15\", \"Dining table\")</li><li><strong>Category:</strong> choose from Wallapop categories (electronics, motor, real estate, etc.)</li><li><strong>Min and max price:</strong> to narrow results</li><li><strong>Location:</strong> use your current location or enter manual coordinates</li><li><strong>Dynamic filters:</strong> category-specific filters appear automatically (year, km, sqm, etc.)</li><li><strong>Text filters:</strong> prohibited and required words (Ultra only)</li></ul><p>You can also import a Wallapop URL directly to create the search automatically.</p>',
+          },
+        },
+        {
+          question: { es: '¿Cómo funciona la Watchlist de precios?', en: 'How does the Price Watchlist work?' },
+          answer: {
+            es: '<p>La <strong>Watchlist</strong> (o radar de precios) te permite seguir artículos específicos de Wallapop y recibir una notificación cuando bajen de precio.</p><p>Cómo funciona:</p><ul><li>Añade cualquier artículo desde el feed de capturas o desde Wallapop</li><li>WallaPro monitoriza automáticamente su precio en cada ciclo de escaneo</li><li>Si el precio baja, recibes una <strong>notificación inmediata</strong></li><li>El plan Free incluye <strong>2 watchlist</strong>, Ultra incluye <strong>15</strong></li></ul>',
+            en: '<p>The <strong>Watchlist</strong> (price radar) lets you track specific Wallapop items and get notified when they drop in price.</p><p>How it works:</p><ul><li>Add any item from the captures feed or from Wallapop</li><li>WallaPro automatically monitors its price on every scan cycle</li><li>If the price drops, you get an <strong>immediate notification</strong></li><li>Free plan includes <strong>2 watchlists</strong>, Ultra includes <strong>15</strong></li></ul>',
+          },
+        },
+        {
+          question: { es: '¿Puedo importar URLs de Wallapop?', en: 'Can I import Wallapop URLs?' },
+          answer: {
+            es: '<p>Sí. Es uno de los métodos más rápidos para crear una búsqueda:</p><ol><li>Copia la URL de cualquier búsqueda o artículo de Wallapop</li><li>En WallaPro, pulsa <strong>\"Importar URL\"</strong></li><li>La app extrae automáticamente los filtros (palabras clave, categoría, precio, ubicación)</li></ol><p>Así configuras una búsqueda en segundos sin tener que rellenar nada manualmente.</p>',
+            en: '<p>Yes. It\'s one of the fastest ways to create a search:</p><ol><li>Copy the URL of any Wallapop search or item</li><li>In WallaPro, tap <strong>\"Import URL\"</strong></li><li>The app automatically extracts filters (keywords, category, price, location)</li></ol><p>You can set up a search in seconds without filling anything manually.</p>',
           },
         },
         {
           question: { es: '¿Cómo funciona el escaneo en segundo plano?', en: 'How does background scanning work?' },
           answer: {
-            es: 'WallaPro usa un servicio foreground nativo Android (Kotlin + AlarmManager) que ejecuta búsquedas periódicas aunque la app esté cerrada. El intervalo es configurable entre 60 minutos (free) y 5 minutos (Ultra).',
-            en: 'WallaPro uses a native Android foreground service (Kotlin + AlarmManager) that runs periodic searches even when the app is closed. The interval is configurable between 60 minutes (free) and 5 minutes (Ultra).',
+            es: '<p>WallaPro utiliza un <strong>servicio foreground nativo de Android</strong> (implementado en Kotlin con AlarmManager) que ejecuta las búsquedas periódicamente incluso con la app cerrada.</p><p>Características técnicas:</p><ul><li><strong>Intervalo Free:</strong> cada 60 minutos</li><li><strong>Intervalo Ultra:</strong> desde 5 minutos</li><li><strong>Jitter anti-detección:</strong> los intervalos varían ligeramente para parecer tráfico humano</li><li><strong>Barajado de alertas:</strong> las notificaciones se distribuyen para evitar picos</li><li>El servicio se muestra como una notificación persistente, lo que evita que Android lo detenga</li></ul>',
+            en: '<p>WallaPro uses a <strong>native Android foreground service</strong> (implemented in Kotlin with AlarmManager) that runs searches periodically even when the app is closed.</p><p>Technical features:</p><ul><li><strong>Free interval:</strong> every 60 minutes</li><li><strong>Ultra interval:</strong> from 5 minutes</li><li><strong>Anti-detection jitter:</strong> intervals vary slightly to mimic human traffic</li><li><strong>Alert shuffling:</strong> notifications are distributed to avoid spikes</li><li>The service shows as a persistent notification, preventing Android from stopping it</li></ul>',
+          },
+        },
+        {
+          question: { es: '¿Cómo funciona el sistema de notificaciones?', en: 'How does the notification system work?' },
+          answer: {
+            es: '<p>WallaPro tiene <strong>4 modos de notificación</strong> configurables:</p><ul><li><strong>Agrupar todo:</strong> todas las capturas en una sola notificación periódica</li><li><strong>Separar:</strong> cada captura genera su propia notificación</li><li><strong>Agrupar por búsqueda:</strong> una notificación por cada búsqueda con resultados nuevos</li><li><strong>Silencioso:</strong> las capturas se guardan pero no se notifica</li></ul><p>El sistema incluye <strong>rate limit anti-spam</strong> para evitar saturaciones y, en modo Ultra, puedes elegir sonidos personalizados para cada tipo de alerta.</p>',
+            en: '<p>WallaPro has <strong>4 configurable notification modes</strong>:</p><ul><li><strong>Group all:</strong> all captures in a single periodic notification</li><li><strong>Separate:</strong> each capture generates its own notification</li><li><strong>Group by search:</strong> one notification per search with new results</li><li><strong>Silent:</strong> captures are saved but no notifications are sent</li></ul><p>The system includes <strong>anti-spam rate limiting</strong> to prevent overload, and in Ultra mode you can choose custom sounds for each alert type.</p>',
+          },
+        },
+        {
+          question: { es: '¿Consume mucha batería?', en: 'Does it drain the battery?' },
+          answer: {
+            es: '<p>WallaPro está optimizado para minimizar el consumo de batería:</p><ul><li>Usa <strong>AlarmManager</strong> de Android, que programa tareas sin mantener la CPU activa continuamente</li><li>Las peticiones a la API se realizan en ráfagas cortas y eficientes</li><li>El intervalo de 60 minutos en Free apenas tiene impacto en la batería diaria</li><li>El servicio foreground tiene bajo overhead y Android lo gestiona eficientemente</li></ul><p>En términos reales, el impacto es similar al de cualquier app de notificaciones: negligible en uso normal.</p>',
+            en: '<p>WallaPro is optimized to minimize battery consumption:</p><ul><li>Uses Android\'s <strong>AlarmManager</strong>, which schedules tasks without keeping the CPU constantly active</li><li>API requests are made in short, efficient bursts</li><li>The 60-minute Free interval has barely any impact on daily battery life</li><li>The foreground service has low overhead and Android manages it efficiently</li></ul><p>In real terms, the impact is similar to any notification app: negligible during normal use.</p>',
           },
         },
         {
           question: { es: '¿Puedo configurar la ubicación?', en: 'Can I configure the location?' },
           answer: {
-            es: 'Sí. Puedes usar tu ubicación actual o introducir coordenadas manuales para acotar las búsquedas a una zona concreta. Si no configuras nada, la app resuelve la ubicación por IP.',
-            en: 'Yes. You can use your current location or enter manual coordinates to narrow searches to a specific area. If you don\'t configure anything, the app resolves location by IP.',
+            es: '<p>Sí. WallaPro te permite controlar la ubicación de tus búsquedas de varias formas:</p><ul><li><strong>Ubicación actual:</strong> usa el GPS de tu dispositivo para buscar cerca de ti</li><li><strong>Coordenadas manuales:</strong> introduce latitud y longitud para acotar a una zona concreta</li><li><strong>Por defecto:</strong> si no configuras nada, la app resuelve la ubicación aproximada por IP</li></ul><p>Esto es especialmente útil para búsquedas de segunda mano donde la cercanía importa: muebles, coches, inmuebles, etc.</p>',
+            en: '<p>Yes. WallaPro lets you control the location of your searches in several ways:</p><ul><li><strong>Current location:</strong> uses your device\'s GPS to search near you</li><li><strong>Manual coordinates:</strong> enter latitude and longitude to target a specific area</li><li><strong>Default:</strong> if you don\'t configure anything, the app resolves approximate location by IP</li></ul><p>This is especially useful for second-hand searches where proximity matters: furniture, cars, real estate, etc.</p>',
+          },
+        },
+        {
+          question: { es: '¿Cómo consigo puntos gratis?', en: 'How do I earn free points?' },
+          answer: {
+            es: '<p>El <strong>sistema de puntos</strong> te permite desbloquear límites extra sin pagar:</p><ul><li>En la app hay un botón <strong>\"Gana puntos\"</strong> que muestra vídeos cortos</li><li>Por cada vídeo completado recibes puntos</li><li>Con los puntos puedes aumentar temporalmente tus límites de búsquedas, capturas y watchlist</li><li>Los puntos se consumen al desbloquear límites y puedes ganar más en cualquier momento</li></ul><p>Es una alternativa gratuita al modo Ultra para quienes prefieren no pagar pero necesitan más margen del que ofrece el plan Free base.</p>',
+            en: '<p>The <strong>points system</strong> lets you unlock extra limits without paying:</p><ul><li>In the app there\'s a <strong>\"Earn points\"</strong> button that shows short videos</li><li>You earn points for each completed video</li><li>Points can be used to temporarily increase your search, capture and watchlist limits</li><li>Points are consumed when unlocking limits and you can earn more at any time</li></ul><p>It\'s a free alternative to Ultra mode for those who prefer not to pay but need more room than the base Free plan offers.</p>',
           },
         },
       ],
@@ -495,50 +523,78 @@ export const apps: App[] = [
         {
           question: { es: '¿Es gratis?', en: 'Is it free?' },
           answer: {
-            es: 'Sí. WallaPro tiene un modo free con 2 búsquedas, 10 capturas y 2 watchlist. Puedes ganar puntos viendo vídeos para desbloquear más límites sin pagar.',
-            en: 'Yes. WallaPro has a free mode with 2 searches, 10 captures and 2 watchlist. You can earn points watching videos to unlock more limits without paying.',
-          },
-        },
-        {
-          question: { es: '¿Necesito cuenta de Wallapop?', en: 'Do I need a Wallapop account?' },
-          answer: {
-            es: 'No. WallaPro funciona directamente contra la API pública de Wallapop. No necesitas registrarte ni iniciar sesión en Wallapop para usar la app.',
-            en: 'No. WallaPro works directly against Wallapop\'s public API. You don\'t need to sign up or log in to Wallapop to use the app.',
-          },
-        },
-        {
-          question: { es: '¿Me pueden banear de Wallapop?', en: 'Can I get banned from Wallapop?' },
-          answer: {
-            es: 'WallaPro usa la API oficial de Wallapop con User-Agent dinámico, jitter anti-detección y rate limiting natural. No realiza scraping web y cumple con los patrones de tráfico de una app normal.',
-            en: 'WallaPro uses Wallapop\'s official API with dynamic User-Agent, anti-detection jitter and natural rate limiting. It doesn\'t do web scraping and follows normal traffic patterns.',
+            es: '<p>Sí. WallaPro tiene un plan <strong>Free</strong> completamente funcional con:</p><ul><li><strong>2 búsquedas inteligentes</strong> activas simultáneamente</li><li><strong>10 capturas</strong> en el feed</li><li><strong>2 watchlist</strong> de seguimiento de precios</li><li>Escaneo cada <strong>60 minutos</strong></li></ul><p>Además, puedes ganar puntos viendo vídeos para desbloquear límites extra sin pagar nada. Si necesitas más potencia, el modo <strong>Ultra</strong> es un pago único que elimina todas las restricciones.</p>',
+            en: '<p>Yes. WallaPro has a fully functional <strong>Free</strong> plan with:</p><ul><li><strong>2 smart searches</strong> active simultaneously</li><li><strong>10 captures</strong> in the feed</li><li><strong>2 price watchlists</strong></li><li>Scanning every <strong>60 minutes</strong></li></ul><p>Plus, you can earn points by watching videos to unlock extra limits at no cost. If you need more power, the <strong>Ultra</strong> mode is a one-time purchase that removes all restrictions.</p>',
           },
         },
         {
           question: { es: '¿Qué incluye el modo Ultra?', en: 'What does Ultra mode include?' },
           answer: {
-            es: 'Pago único con límites desbloqueados: 20 búsquedas, 500 capturas, 15 watchlist, intervalos de hasta 5 minutos, filtros de texto, notificaciones avanzadas y sin anuncios.',
-            en: 'One-time payment with unlocked limits: 20 searches, 500 captures, 15 watchlist, intervals down to 5 minutes, text filters, advanced notifications and no ads.',
+            es: '<p><strong>Ultra</strong> es un pago único (no suscripción) que desbloquea todos los límites:</p><ul><li><strong>20 búsquedas</strong> activas</li><li><strong>500 capturas</strong> en el feed</li><li><strong>15 watchlist</strong> de precios</li><li>Intervalos de escaneo de hasta <strong>5 minutos</strong></li><li><strong>Filtros de texto</strong> (palabras prohibidas y obligadas)</li><li><strong>Notificaciones avanzadas</strong> con sonidos personalizados</li><li><strong>Sin anuncios</strong></li></ul><p>Una vez comprado, es tuyo para siempre. No hay suscripciones ni pagos recurrentes.</p>',
+            en: '<p><strong>Ultra</strong> is a one-time payment (not a subscription) that unlocks all limits:</p><ul><li><strong>20 searches</strong> active</li><li><strong>500 captures</strong> in the feed</li><li><strong>15 price watchlists</strong></li><li>Scan intervals down to <strong>5 minutes</strong></li><li><strong>Text filters</strong> (prohibited and required words)</li><li><strong>Advanced notifications</strong> with custom sounds</li><li><strong>No ads</strong></li></ul><p>Once purchased, it\'s yours forever. No subscriptions or recurring payments.</p>',
           },
         },
         {
-          question: { es: '¿Funciona en iOS?', en: 'Does it work on iOS?' },
+          question: { es: '¿Necesito cuenta de Wallapop?', en: 'Do I need a Wallapop account?' },
           answer: {
-            es: 'De momento WallaPro está disponible solo en Android. iOS y web están en la roadmap pero no hay fecha confirmada.',
-            en: 'For now WallaPro is only available on Android. iOS and web are on the roadmap but there is no confirmed date.',
+            es: '<p>No. WallaPro funciona directamente contra la API pública de Wallapop. No necesitas registrarte ni iniciar sesión en Wallapop para usar la app.</p><p>Toda la configuración se almacena localmente en tu dispositivo. Tu privacidad está protegida: no se recogen datos personales ni credenciales.</p>',
+            en: '<p>No. WallaPro works directly against Wallapop\'s public API. You don\'t need to sign up or log in to Wallapop to use the app.</p><p>All configuration is stored locally on your device. Your privacy is protected: no personal data or credentials are collected.</p>',
+          },
+        },
+        {
+          question: { es: '¿Cómo configuro una búsqueda inteligente?', en: 'How do I set up a smart search?' },
+          answer: {
+            es: '<p>Es muy sencillo. Desde la pantalla principal pulsa <strong>\"Nueva búsqueda\"</strong> y configura:</p><ul><li><strong>Palabras clave:</strong> lo que quieres encontrar (ej. \"iPhone 15\", \"Mesa comedor\")</li><li><strong>Categoría:</strong> elige entre las categorías de Wallapop (electrónica, motor, inmobiliaria, etc.)</li><li><strong>Precio mínimo y máximo:</strong> para acotar los resultados</li><li><strong>Ubicación:</strong> usa tu ubicación actual o introduce coordenadas manuales</li><li><strong>Filtros dinámicos:</strong> según la categoría aparecen filtros específicos (año, km, metros, etc.)</li><li><strong>Filtros de texto:</strong> palabras prohibidas y obligadas (solo Ultra)</li></ul><p>También puedes importar una URL de Wallapop directamente para crear la búsqueda automáticamente.</p>',
+            en: '<p>It\'s very simple. From the main screen tap <strong>\"New search\"</strong> and configure:</p><ul><li><strong>Keywords:</strong> what you want to find (e.g. \"iPhone 15\", \"Dining table\")</li><li><strong>Category:</strong> choose from Wallapop categories (electronics, motor, real estate, etc.)</li><li><strong>Min and max price:</strong> to narrow results</li><li><strong>Location:</strong> use your current location or enter manual coordinates</li><li><strong>Dynamic filters:</strong> category-specific filters appear automatically (year, km, sqm, etc.)</li><li><strong>Text filters:</strong> prohibited and required words (Ultra only)</li></ul><p>You can also import a Wallapop URL directly to create the search automatically.</p>',
+          },
+        },
+        {
+          question: { es: '¿Cómo funciona la Watchlist de precios?', en: 'How does the Price Watchlist work?' },
+          answer: {
+            es: '<p>La <strong>Watchlist</strong> (o radar de precios) te permite seguir artículos específicos de Wallapop y recibir una notificación cuando bajen de precio.</p><p>Cómo funciona:</p><ul><li>Añade cualquier artículo desde el feed de capturas o desde Wallapop</li><li>WallaPro monitoriza automáticamente su precio en cada ciclo de escaneo</li><li>Si el precio baja, recibes una <strong>notificación inmediata</strong></li><li>El plan Free incluye <strong>2 watchlist</strong>, Ultra incluye <strong>15</strong></li></ul>',
+            en: '<p>The <strong>Watchlist</strong> (price radar) lets you track specific Wallapop items and get notified when they drop in price.</p><p>How it works:</p><ul><li>Add any item from the captures feed or from Wallapop</li><li>WallaPro automatically monitors its price on every scan cycle</li><li>If the price drops, you get an <strong>immediate notification</strong></li><li>Free plan includes <strong>2 watchlists</strong>, Ultra includes <strong>15</strong></li></ul>',
+          },
+        },
+        {
+          question: { es: '¿Puedo importar URLs de Wallapop?', en: 'Can I import Wallapop URLs?' },
+          answer: {
+            es: '<p>Sí. Es uno de los métodos más rápidos para crear una búsqueda:</p><ol><li>Copia la URL de cualquier búsqueda o artículo de Wallapop</li><li>En WallaPro, pulsa <strong>\"Importar URL\"</strong></li><li>La app extrae automáticamente los filtros (palabras clave, categoría, precio, ubicación)</li></ol><p>Así configuras una búsqueda en segundos sin tener que rellenar nada manualmente.</p>',
+            en: '<p>Yes. It\'s one of the fastest ways to create a search:</p><ol><li>Copy the URL of any Wallapop search or item</li><li>In WallaPro, tap <strong>\"Import URL\"</strong></li><li>The app automatically extracts filters (keywords, category, price, location)</li></ol><p>You can set up a search in seconds without filling anything manually.</p>',
           },
         },
         {
           question: { es: '¿Cómo funciona el escaneo en segundo plano?', en: 'How does background scanning work?' },
           answer: {
-            es: 'WallaPro usa un servicio foreground nativo Android (Kotlin + AlarmManager) que ejecuta búsquedas periódicas aunque la app esté cerrada. El intervalo es configurable entre 60 minutos (free) y 5 minutos (Ultra).',
-            en: 'WallaPro uses a native Android foreground service (Kotlin + AlarmManager) that runs periodic searches even when the app is closed. The interval is configurable between 60 minutes (free) and 5 minutes (Ultra).',
+            es: '<p>WallaPro utiliza un <strong>servicio foreground nativo de Android</strong> (implementado en Kotlin con AlarmManager) que ejecuta las búsquedas periódicamente incluso con la app cerrada.</p><p>Características técnicas:</p><ul><li><strong>Intervalo Free:</strong> cada 60 minutos</li><li><strong>Intervalo Ultra:</strong> desde 5 minutos</li><li><strong>Jitter anti-detección:</strong> los intervalos varían ligeramente para parecer tráfico humano</li><li><strong>Barajado de alertas:</strong> las notificaciones se distribuyen para evitar picos</li><li>El servicio se muestra como una notificación persistente, lo que evita que Android lo detenga</li></ul>',
+            en: '<p>WallaPro uses a <strong>native Android foreground service</strong> (implemented in Kotlin with AlarmManager) that runs searches periodically even when the app is closed.</p><p>Technical features:</p><ul><li><strong>Free interval:</strong> every 60 minutes</li><li><strong>Ultra interval:</strong> from 5 minutes</li><li><strong>Anti-detection jitter:</strong> intervals vary slightly to mimic human traffic</li><li><strong>Alert shuffling:</strong> notifications are distributed to avoid spikes</li><li>The service shows as a persistent notification, preventing Android from stopping it</li></ul>',
+          },
+        },
+        {
+          question: { es: '¿Cómo funciona el sistema de notificaciones?', en: 'How does the notification system work?' },
+          answer: {
+            es: '<p>WallaPro tiene <strong>4 modos de notificación</strong> configurables:</p><ul><li><strong>Agrupar todo:</strong> todas las capturas en una sola notificación periódica</li><li><strong>Separar:</strong> cada captura genera su propia notificación</li><li><strong>Agrupar por búsqueda:</strong> una notificación por cada búsqueda con resultados nuevos</li><li><strong>Silencioso:</strong> las capturas se guardan pero no se notifica</li></ul><p>El sistema incluye <strong>rate limit anti-spam</strong> para evitar saturaciones y, en modo Ultra, puedes elegir sonidos personalizados para cada tipo de alerta.</p>',
+            en: '<p>WallaPro has <strong>4 configurable notification modes</strong>:</p><ul><li><strong>Group all:</strong> all captures in a single periodic notification</li><li><strong>Separate:</strong> each capture generates its own notification</li><li><strong>Group by search:</strong> one notification per search with new results</li><li><strong>Silent:</strong> captures are saved but no notifications are sent</li></ul><p>The system includes <strong>anti-spam rate limiting</strong> to prevent overload, and in Ultra mode you can choose custom sounds for each alert type.</p>',
+          },
+        },
+        {
+          question: { es: '¿Consume mucha batería?', en: 'Does it drain the battery?' },
+          answer: {
+            es: '<p>WallaPro está optimizado para minimizar el consumo de batería:</p><ul><li>Usa <strong>AlarmManager</strong> de Android, que programa tareas sin mantener la CPU activa continuamente</li><li>Las peticiones a la API se realizan en ráfagas cortas y eficientes</li><li>El intervalo de 60 minutos en Free apenas tiene impacto en la batería diaria</li><li>El servicio foreground tiene bajo overhead y Android lo gestiona eficientemente</li></ul><p>En términos reales, el impacto es similar al de cualquier app de notificaciones: negligible en uso normal.</p>',
+            en: '<p>WallaPro is optimized to minimize battery consumption:</p><ul><li>Uses Android\'s <strong>AlarmManager</strong>, which schedules tasks without keeping the CPU constantly active</li><li>API requests are made in short, efficient bursts</li><li>The 60-minute Free interval has barely any impact on daily battery life</li><li>The foreground service has low overhead and Android manages it efficiently</li></ul><p>In real terms, the impact is similar to any notification app: negligible during normal use.</p>',
           },
         },
         {
           question: { es: '¿Puedo configurar la ubicación?', en: 'Can I configure the location?' },
           answer: {
-            es: 'Sí. Puedes usar tu ubicación actual o introducir coordenadas manuales para acotar las búsquedas a una zona concreta. Si no configuras nada, la app resuelve la ubicación por IP.',
-            en: 'Yes. You can use your current location or enter manual coordinates to narrow searches to a specific area. If you don\'t configure anything, the app resolves location by IP.',
+            es: '<p>Sí. WallaPro te permite controlar la ubicación de tus búsquedas de varias formas:</p><ul><li><strong>Ubicación actual:</strong> usa el GPS de tu dispositivo para buscar cerca de ti</li><li><strong>Coordenadas manuales:</strong> introduce latitud y longitud para acotar a una zona concreta</li><li><strong>Por defecto:</strong> si no configuras nada, la app resuelve la ubicación aproximada por IP</li></ul><p>Esto es especialmente útil para búsquedas de segunda mano donde la cercanía importa: muebles, coches, inmuebles, etc.</p>',
+            en: '<p>Yes. WallaPro lets you control the location of your searches in several ways:</p><ul><li><strong>Current location:</strong> uses your device\'s GPS to search near you</li><li><strong>Manual coordinates:</strong> enter latitude and longitude to target a specific area</li><li><strong>Default:</strong> if you don\'t configure anything, the app resolves approximate location by IP</li></ul><p>This is especially useful for second-hand searches where proximity matters: furniture, cars, real estate, etc.</p>',
+          },
+        },
+        {
+          question: { es: '¿Cómo consigo puntos gratis?', en: 'How do I earn free points?' },
+          answer: {
+            es: '<p>El <strong>sistema de puntos</strong> te permite desbloquear límites extra sin pagar:</p><ul><li>En la app hay un botón <strong>\"Gana puntos\"</strong> que muestra vídeos cortos</li><li>Por cada vídeo completado recibes puntos</li><li>Con los puntos puedes aumentar temporalmente tus límites de búsquedas, capturas y watchlist</li><li>Los puntos se consumen al desbloquear límites y puedes ganar más en cualquier momento</li></ul><p>Es una alternativa gratuita al modo Ultra para quienes prefieren no pagar pero necesitan más margen del que ofrece el plan Free base.</p>',
+            en: '<p>The <strong>points system</strong> lets you unlock extra limits without paying:</p><ul><li>In the app there\'s a <strong>\"Earn points\"</strong> button that shows short videos</li><li>You earn points for each completed video</li><li>Points can be used to temporarily increase your search, capture and watchlist limits</li><li>Points are consumed when unlocking limits and you can earn more at any time</li></ul><p>It\'s a free alternative to Ultra mode for those who prefer not to pay but need more room than the base Free plan offers.</p>',
           },
         },
       ],

@@ -65,10 +65,10 @@ const ui = lang === 'es' ? {
               <h3 class="app-card__title">{app.name}</h3>
               <p class="app-card__subtitle">{app.tagline[lang]}</p>
               <div class="app-card__tags">
-                {app.tags.slice(0, 4).map((tag, idx) => (
+                {app.tags[lang].slice(0, 5).map((tag, idx) => (
                   <>
                     <span class="app-card__tag">{tag}</span>
-                    {idx < Math.min(app.tags.length, 4) - 1 && <span class="tag-sep">·</span>}
+                    {idx < Math.min(app.tags[lang].length, 5) - 1 && <span class="tag-sep">·</span>}
                   </>
                 ))}
               </div>

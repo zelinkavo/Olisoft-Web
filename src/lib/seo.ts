@@ -1,20 +1,4 @@
 /**
- * SEO Utilities
- *
- * Helpers for generating meta tags, JSON-LD structured
- * data, and Open Graph metadata.
- */
-
-export interface SEOProps {
-  title: string;
-  description: string;
-  lang?: 'es' | 'en';
-  canonicalURL?: string;
-  ogImage?: string;
-  type?: 'website' | 'article';
-}
-
-/**
  * Generate JSON-LD structured data for OliSoft APPs
  */
 export function generateOrganizationJsonLd(siteUrl: string | URL, lang: 'es' | 'en' = 'es') {

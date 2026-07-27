@@ -35,8 +35,10 @@ export interface App {
   };
   iconUrl: string;
   googlePlayUrl: string;
-  technologies: string[];
-  tags: string[];
+  tags: {
+    es: string[];
+    en: string[];
+  };
   color: string;
   features?: {
     es: Feature[];
@@ -54,8 +56,8 @@ export const apps: App[] = [
     slug: 'simple-crypto-alerts',
     name: 'Simple Crypto Alerts',
     tagline: {
-      es: 'Alertas de precio cripto y monitorización en tiempo real',
-      en: 'Real-time crypto price alerts and monitoring',
+      es: 'Alertas de precio cripto en tiempo real. Recibe notificaciones de Bitcoin, Ethereum y más. Monitorización 24/7 gratis.',
+      en: 'Real-time crypto price alerts. Get notifications for Bitcoin, Ethereum and more. Free 24/7 monitoring.',
     },
     description: {
       es: 'Configura alertas en segundos y deja que la app supervise el mercado por ti. Notificaciones precisas en tiempo real, incluso con la app cerrada.',
@@ -63,8 +65,10 @@ export const apps: App[] = [
     },
     iconUrl: '/icon-scrypto-alerts.webp',
     googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.simplecryptoalerts.app',
-    technologies: ['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API'],
-    tags: ['Criptomonedas', 'Alertas', 'Bitcoin', 'Precios'],
+    tags: {
+      es: ['Criptomonedas', 'Alertas', 'Bitcoin', 'Precios', 'Notificaciones push'],
+      en: ['Cryptocurrencies', 'Alerts', 'Bitcoin', 'Prices', 'Push notifications'],
+    },
     color: '#d4a24e',
     features: {
       es: [
@@ -296,8 +300,8 @@ export const apps: App[] = [
     slug: 'wallapro',
     name: 'WallaPro',
     tagline: {
-      es: 'Sniper inteligente para Wallapop',
-      en: 'Smart sniper for Wallapop',
+      es: 'Alertas Wallapop con notificaciones instantáneas. Encuentra chollos antes que nadie.',
+      en: 'Wallapop alerts with instant notifications. Find deals before anyone else.',
     },
     description: {
       es: 'Escanea Wallapop en segundo plano, encuentra chollos antes que nadie y te notifica al instante.',
@@ -305,8 +309,10 @@ export const apps: App[] = [
     },
     iconUrl: '/icon-wallapro.webp',
     googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.wallapro.app',
-    technologies: ['React Native', 'Expo', 'TypeScript', 'Kotlin', 'SQLite'],
-    tags: ['Wallapop', 'Chollos', 'Segunda mano', 'Alertas'],
+    tags: {
+      es: ['Wallapop', 'Chollos', 'Segunda mano', 'Alertas', 'Notificaciones push'],
+      en: ['Wallapop', 'Deals', 'Second hand', 'Alerts', 'Push notifications'],
+    },
     color: '#5bb8a6',
     features: {
       es: [

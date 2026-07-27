@@ -49,18 +49,3 @@ export function setupScrollAnimations() {
     });
   });
 }
-
-/**
- * Staggered animation delay for child elements
- */
-export function staggerChildren(
-  parentSelector: string,
-  delayMs: number = 100,
-) {
-  const parent = document.querySelector(parentSelector);
-  if (!parent) return;
-
-  Array.from(parent.children).forEach((child, index) => {
-    (child as HTMLElement).style.animationDelay = `${index * delayMs}ms`;
-  });
-}

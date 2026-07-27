@@ -46,3 +46,31 @@ export function generateWebsiteJsonLd(siteUrl: string | URL) {
     inLanguage: ['es', 'en'],
   };
 }
+
+/**
+ * Generate JSON-LD structured data for a Software Application
+ */
+export function generateSoftwareAppJsonLd(
+  siteUrl: string | URL,
+  name: string,
+  description: string,
+  iconUrl: string,
+  googlePlayUrl: string,
+) {
+  const imageUrl = new URL(iconUrl, siteUrl).href;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name,
+    description,
+    url: googlePlayUrl,
+    image: imageUrl,
+    operatingSystem: 'Android',
+    applicationCategory: 'UtilitiesApplication',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  };
+}

@@ -22,6 +22,7 @@ interface Props {
   includeNav?: boolean;
   includeFooter?: boolean;
   noindex?: boolean;
+  extraJsonLd?: Record<string, unknown>[];
 }
 
 const {
@@ -32,6 +33,7 @@ const {
   includeNav = true,
   includeFooter = true,
   noindex = false,
+  extraJsonLd = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -52,6 +54,11 @@ const websiteJsonLd = generateWebsiteJsonLd(Astro.site);
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="es" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(`/en${Astro.url.pathname}`, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname, Astro.site)} />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -67,6 +74,7 @@ const websiteJsonLd = generateWebsiteJsonLd(Astro.site);
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Fonts — Non-render-blocking strategy -->
@@ -93,6 +101,9 @@ const websiteJsonLd = generateWebsiteJsonLd(Astro.site);
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+    {extraJsonLd.map(data => (
+      <script type="application/ld+json" set:html={JSON.stringify(data)} />
+    ))}
   </head>
   <body>
     {includeNav && <Navigation lang={lang} />}

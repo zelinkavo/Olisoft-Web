@@ -4,6 +4,8 @@
  *
  * Social links, tech credits, and quick navigation.
  */
+import { localizePath } from '../lib/i18n';
+
 interface Props {
   lang?: 'es' | 'en';
 }
@@ -39,7 +41,7 @@ const navLinks = [
         <ul class="footer__nav-list" role="list">
           {navLinks.map((item) => (
             <li>
-              <a href={item.href} class="footer__nav-link">
+              <a href={localizePath(item.href, lang)} class="footer__nav-link">
                 <span class="nav-bracket" aria-hidden="true">[</span>
                 <span class="nav-text">{item.label[lang].toUpperCase()}</span>
                 <span class="nav-bracket" aria-hidden="true">]</span>

@@ -1,41 +1,94 @@
 ---
 import AppLandingLayout from '../layouts/AppLandingLayout.astro';
+import AppIcon from '../components/AppIcon.astro';
 import FAQ from '../components/FAQ.astro';
 import Card from '../components/ui/Card.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
+import { generateSoftwareAppJsonLd } from '../lib/seo';
+import { localizePath } from '../lib/i18n';
 import { apps } from '../data/apps';
 
+const lang: 'es' | 'en' = Astro.locals.lang;
 const wallapro = apps.find(a => a.id === 'wallapro')!;
 const otherApps = apps.filter(a => a.id !== 'wallapro');
-const features = wallapro.features!.es;
-const faq = wallapro.faq!.es.map(item => ({
-  question: item.question.es,
-  answer: item.answer.es,
+const features = wallapro.features![lang];
+const faq = wallapro.faq![lang].map(item => ({
+  question: item.question[lang],
+  answer: item.answer[lang],
 }));
+const softwareJsonLd = generateSoftwareAppJsonLd(
+  Astro.site,
+  wallapro.name,
+  wallapro.description[lang],
+  wallapro.iconUrl,
+  wallapro.googlePlayUrl,
+);
+
+const ui = lang === 'es' ? {
+  sectionFeatures: 'Funcionalidades',
+  featuresSubtitle: 'Todo lo que necesitas para encontrar chollos',
+  sectionCompare: 'Free vs Ultra',
+  compareSubtitle: 'Compara los planes',
+  compareFeature: 'Característica',
+  compareSearches: 'Búsquedas activas',
+  compareCaptures: 'Capturas en feed',
+  compareWatchlist: 'Watchlist (radar)',
+  compareInterval: 'Intervalo de escaneo',
+  compareTextFilters: 'Filtros de texto',
+  compareNotifs: 'Notificaciones separadas',
+  compareSound: 'Sonido extra',
+  compareNoAds: 'Sin anuncios',
+  sectionFaq: 'Preguntas frecuentes',
+  faqSubtitle: 'Resolvemos tus dudas',
+  sectionOther: 'Otras apps',
+  otherSubtitle: 'Descubre nuestras otras aplicaciones',
+  privacyLabel: 'Política de privacidad',
+} : {
+  sectionFeatures: 'Features',
+  featuresSubtitle: 'Everything you need to find great deals',
+  sectionCompare: 'Free vs Ultra',
+  compareSubtitle: 'Compare plans',
+  compareFeature: 'Feature',
+  compareSearches: 'Active searches',
+  compareCaptures: 'Feed captures',
+  compareWatchlist: 'Watchlist (radar)',
+  compareInterval: 'Scan interval',
+  compareTextFilters: 'Text filters',
+  compareNotifs: 'Separate notifications',
+  compareSound: 'Extra sound',
+  compareNoAds: 'No ads',
+  sectionFaq: 'FAQ',
+  faqSubtitle: "We've got answers",
+  sectionOther: 'Other apps',
+  otherSubtitle: 'Check out our other apps',
+  privacyLabel: 'Privacy Policy',
+};
 ---
 
 <AppLandingLayout
-  title="WallaPro - Alertas Wallapop y Monitoreo de Precios"
-  description="Sniper inteligente para Wallapop. Escanea en segundo plano, encuentra chollos antes que nadie y te notifica al instante."
+  title={lang === 'es' ? 'WallaPro - Alertas Wallapop y Monitoreo de Precios' : 'WallaPro - Wallapop Alerts and Price Monitoring'}
+  description={lang === 'es' ? 'Recibe alertas Wallapop gratis. Escanea Wallapop en segundo plano, encuentra chollos antes que nadie y te notifica al instante.' : 'Get free Wallapop alerts. Scan Wallapop in the background, find deals before anyone else, and get notified instantly.'}
   color="teal"
+  lang={lang}
   technologies={['React Native', 'Expo', 'TypeScript', 'Kotlin', 'SQLite']}
   googlePlayUrl={wallapro.googlePlayUrl}
+  extraJsonLd={[softwareJsonLd]}
 >
 
   <!-- ==================== FEATURES ==================== -->
   <section class="features-section">
     <SectionHeader
       number="01."
-      title="Features"
-      subtitle="Todo lo que necesitas para encontrar chollos"
+      title={ui.sectionFeatures}
+      subtitle={ui.featuresSubtitle}
     />
 
     <div class="features-grid">
       {features.map((feature, i) => (
         <div class="feature-card" data-animate="fade-up" style={`--stagger-index: ${i}`}>
           <span class="feature-card__icon" aria-hidden="true">{feature.icon}</span>
-          <h3 class="feature-card__title">{feature.title.es}</h3>
-          <p class="feature-card__desc">{feature.description.es}</p>
+          <h3 class="feature-card__title">{feature.title[lang]}</h3>
+          <p class="feature-card__desc">{feature.description[lang]}</p>
         </div>
       ))}
     </div>
@@ -45,57 +98,57 @@ const faq = wallapro.faq!.es.map(item => ({
   <section class="comparison-section">
     <SectionHeader
       number="02."
-      title="Free vs Ultra"
-      subtitle="Compara los planes"
+      title={ui.sectionCompare}
+      subtitle={ui.compareSubtitle}
     />
 
     <div class="comparison-table" data-animate="fade-up">
       <table>
         <thead>
           <tr>
-            <th>Característica</th>
+            <th>{ui.compareFeature}</th>
             <th class="col-free">Free</th>
             <th class="col-ultra">Ultra</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Búsquedas activas</td>
+            <td>{ui.compareSearches}</td>
             <td class="col-free">2</td>
             <td class="col-ultra">20</td>
           </tr>
           <tr>
-            <td>Capturas en feed</td>
+            <td>{ui.compareCaptures}</td>
             <td class="col-free">10</td>
             <td class="col-ultra">500</td>
           </tr>
           <tr>
-            <td>Watchlist (radar)</td>
+            <td>{ui.compareWatchlist}</td>
             <td class="col-free">2</td>
             <td class="col-ultra">15</td>
           </tr>
           <tr>
-            <td>Intervalo de escaneo</td>
+            <td>{ui.compareInterval}</td>
             <td class="col-free">60 min</td>
             <td class="col-ultra">5 min</td>
           </tr>
           <tr>
-            <td>Filtros de texto</td>
+            <td>{ui.compareTextFilters}</td>
             <td class="col-free">✗</td>
             <td class="col-ultra">✓</td>
           </tr>
           <tr>
-            <td>Notificaciones separadas</td>
+            <td>{ui.compareNotifs}</td>
             <td class="col-free">✗</td>
             <td class="col-ultra">✓</td>
           </tr>
           <tr>
-            <td>Sonido extra</td>
+            <td>{ui.compareSound}</td>
             <td class="col-free">✗</td>
             <td class="col-ultra">✓</td>
           </tr>
           <tr>
-            <td>Sin anuncios</td>
+            <td>{ui.compareNoAds}</td>
             <td class="col-free">✗</td>
             <td class="col-ultra">✓</td>
           </tr>
@@ -108,8 +161,8 @@ const faq = wallapro.faq!.es.map(item => ({
   <section class="faq-section">
     <SectionHeader
       number="03."
-      title="Preguntas frecuentes"
-      subtitle="Resolvemos tus dudas"
+      title={ui.sectionFaq}
+      subtitle={ui.faqSubtitle}
     />
 
     <div data-animate="fade-up">
@@ -121,18 +174,18 @@ const faq = wallapro.faq!.es.map(item => ({
   <section class="other-apps-section">
     <SectionHeader
       number="04."
-      title="Otras apps"
-      subtitle="Descubre nuestras otras aplicaciones"
+      title={ui.sectionOther}
+      subtitle={ui.otherSubtitle}
     />
 
     <div class="other-apps-grid">
       {otherApps.map((app, i) => (
         <div data-animate="fade-up" style={`--stagger-index: ${i}`}>
-          <Card variant="featured" href={`/${app.slug}`} tag="app">
+          <Card variant="featured" href={localizePath(`/${app.slug}`, lang)} tag="app">
             <div class="other-app-card">
-              <span class="other-app-card__icon" aria-hidden="true">{app.icon}</span>
+              <AppIcon src={app.iconUrl} alt={app.name} />
               <h3 class="other-app-card__title">{app.name}</h3>
-              <p class="other-app-card__subtitle">{app.tagline.es}</p>
+              <p class="other-app-card__subtitle">{app.tagline[lang]}</p>
             </div>
           </Card>
         </div>
@@ -142,7 +195,7 @@ const faq = wallapro.faq!.es.map(item => ({
 
   <!-- ==================== PRIVACY ==================== -->
   <div class="privacy-link">
-    <a href="/privacy/wallapro">Privacy Policy</a>
+    <a href={localizePath('/privacy/wallapro', lang)}>{ui.privacyLabel}</a>
   </div>
 
 </AppLandingLayout>
@@ -272,9 +325,10 @@ const faq = wallapro.faq!.es.map(item => ({
     gap: var(--space-sm);
   }
 
-  .other-app-card__icon {
-    font-size: 1.5rem;
+  .other-app-card :global(img) {
+    display: block;
     margin-bottom: var(--space-xs);
+    border-radius: var(--radius-sm);
   }
 
   .other-app-card__title {

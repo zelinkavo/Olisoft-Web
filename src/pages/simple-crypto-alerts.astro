@@ -1,41 +1,92 @@
 ---
 import AppLandingLayout from '../layouts/AppLandingLayout.astro';
+import AppIcon from '../components/AppIcon.astro';
 import FAQ from '../components/FAQ.astro';
 import Card from '../components/ui/Card.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
+import { generateSoftwareAppJsonLd } from '../lib/seo';
+import { localizePath } from '../lib/i18n';
 import { apps } from '../data/apps';
 
+const lang: 'es' | 'en' = Astro.locals.lang;
 const sca = apps.find(a => a.id === 'simple-crypto-alerts')!;
 const otherApps = apps.filter(a => a.id !== 'simple-crypto-alerts');
-const features = sca.features!.es;
-const faq = sca.faq!.es.map(item => ({
-  question: item.question.es,
-  answer: item.answer.es,
+const features = sca.features![lang];
+const faq = sca.faq![lang].map(item => ({
+  question: item.question[lang],
+  answer: item.answer[lang],
 }));
+const softwareJsonLd = generateSoftwareAppJsonLd(
+  Astro.site,
+  sca.name,
+  sca.description[lang],
+  sca.iconUrl,
+  sca.googlePlayUrl,
+);
+
+const ui = lang === 'es' ? {
+  sectionFeatures: 'Funcionalidades',
+  featuresSubtitle: 'Todo lo que necesitas para seguir tus criptomonedas',
+  sectionCompare: 'Gratis vs Pro',
+  compareSubtitle: 'Compara los planes',
+  compareFeature: 'Característica',
+  compareMonitor: 'Crypto Live Monitor',
+  compareAlerts: 'Alertas activas',
+  compareNotifs: 'Notificaciones push',
+  compareSound: 'Super Sound Alert',
+  compareFavs: 'Favoritos',
+  compareMode: 'Modo día/noche',
+  comparePerf: 'Rendimiento optimizado',
+  sectionFaq: 'Preguntas frecuentes',
+  faqSubtitle: 'Resolvemos tus dudas',
+  sectionOther: 'Otras apps',
+  otherSubtitle: 'Descubre nuestras otras aplicaciones',
+  privacyLabel: 'Política de privacidad',
+} : {
+  sectionFeatures: 'Features',
+  featuresSubtitle: 'Everything you need to track your crypto',
+  sectionCompare: 'Free vs Pro',
+  compareSubtitle: 'Compare plans',
+  compareFeature: 'Feature',
+  compareMonitor: 'Crypto Live Monitor',
+  compareAlerts: 'Active alerts',
+  compareNotifs: 'Push notifications',
+  compareSound: 'Super Sound Alert',
+  compareFavs: 'Favorites',
+  compareMode: 'Day/night mode',
+  comparePerf: 'Optimized performance',
+  sectionFaq: 'FAQ',
+  faqSubtitle: "We've got answers",
+  sectionOther: 'Other apps',
+  otherSubtitle: 'Check out our other apps',
+  privacyLabel: 'Privacy Policy',
+};
 ---
 
 <AppLandingLayout
-  title="Simple Crypto Alerts - Alertas de Precio Cripto"
-  description="Alertas de precio cripto y monitorización en tiempo real. Configura alertas en segundos y deja que la app supervise el mercado por ti."
+  title={lang === 'es' ? 'Simple Crypto Alerts - Alertas de Precio Cripto' : 'Simple Crypto Alerts - Crypto Price Alerts'}
+  description={lang === 'es' ? 'Alertas de precio cripto en tiempo real. Configura alertas Bitcoin, Ethereum y más en segundos. Monitorización 24/7 gratis.' : 'Real-time crypto price alerts. Set Bitcoin, Ethereum and more alerts in seconds. Free 24/7 monitoring.'}
   color="gold"
+  lang={lang}
   technologies={['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API']}
   googlePlayUrl={sca.googlePlayUrl}
+  extraJsonLd={[softwareJsonLd]}
 >
 
   <!-- ==================== FEATURES ==================== -->
   <section class="features-section">
     <SectionHeader
       number="01."
-      title="Features"
-      subtitle="Todo lo que necesitas para seguir tus criptomonedas"
+      title={ui.sectionFeatures}
+      subtitle={ui.featuresSubtitle}
     />
 
     <div class="features-grid">
       {features.map((feature, i) => (
         <div class="feature-card" data-animate="fade-up" style={`--stagger-index: ${i}`}>
           <span class="feature-card__icon" aria-hidden="true">{feature.icon}</span>
-          <h3 class="feature-card__title">{feature.title.es}</h3>
-          <p class="feature-card__desc">{feature.description.es}</p>
+          <h3 class="feature-card__title">{feature.title[lang]}</h3>
+          <p class="feature-card__desc">{feature.description[lang]}</p>
         </div>
       ))}
     </div>
@@ -45,52 +96,52 @@ const faq = sca.faq!.es.map(item => ({
   <section class="comparison-section">
     <SectionHeader
       number="02."
-      title="Gratis vs Pro"
-      subtitle="Compara los planes"
+      title={ui.sectionCompare}
+      subtitle={ui.compareSubtitle}
     />
 
     <div class="comparison-table" data-animate="fade-up">
       <table>
         <thead>
           <tr>
-            <th>Característica</th>
-            <th class="col-free">Gratis</th>
+            <th>{ui.compareFeature}</th>
+            <th class="col-free">{lang === 'es' ? 'Gratis' : 'Free'}</th>
             <th class="col-pro">Pro</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Crypto Live Monitor</td>
-            <td class="col-free">Normal</td>
-            <td class="col-pro">ULTRA en tiempo real</td>
+            <td>{ui.compareMonitor}</td>
+            <td class="col-free">{lang === 'es' ? 'Normal' : 'Standard'}</td>
+            <td class="col-pro">{lang === 'es' ? 'ULTRA en tiempo real' : 'Real-time ULTRA'}</td>
           </tr>
           <tr>
-            <td>Alertas activas</td>
-            <td class="col-free">\u2014</td>
-            <td class="col-pro">Hasta 20</td>
+            <td>{ui.compareAlerts}</td>
+            <td class="col-free">—</td>
+            <td class="col-pro">{lang === 'es' ? 'Hasta 20' : 'Up to 20'}</td>
           </tr>
           <tr>
-            <td>Notificaciones push</td>
+            <td>{ui.compareNotifs}</td>
             <td class="col-free">✓</td>
-            <td class="col-pro">✓ + Prioridad</td>
+            <td class="col-pro">{lang === 'es' ? '✓ + Prioridad' : '✓ + Priority'}</td>
           </tr>
           <tr>
-            <td>Super Sound Alert</td>
+            <td>{ui.compareSound}</td>
             <td class="col-free">✗</td>
             <td class="col-pro">✓</td>
           </tr>
           <tr>
-            <td>Favoritos</td>
+            <td>{ui.compareFavs}</td>
             <td class="col-free">✓</td>
             <td class="col-pro">✓</td>
           </tr>
           <tr>
-            <td>Modo día/noche</td>
+            <td>{ui.compareMode}</td>
             <td class="col-free">✓</td>
             <td class="col-pro">✓</td>
           </tr>
           <tr>
-            <td>Rendimiento optimizado</td>
+            <td>{ui.comparePerf}</td>
             <td class="col-free">✗</td>
             <td class="col-pro">✓</td>
           </tr>
@@ -103,8 +154,8 @@ const faq = sca.faq!.es.map(item => ({
   <section class="faq-section">
     <SectionHeader
       number="03."
-      title="Preguntas frecuentes"
-      subtitle="Resolvemos tus dudas"
+      title={ui.sectionFaq}
+      subtitle={ui.faqSubtitle}
     />
 
     <div data-animate="fade-up">
@@ -116,18 +167,18 @@ const faq = sca.faq!.es.map(item => ({
   <section class="other-apps-section">
     <SectionHeader
       number="04."
-      title="Otras apps"
-      subtitle="Descubre nuestras otras aplicaciones"
+      title={ui.sectionOther}
+      subtitle={ui.otherSubtitle}
     />
 
     <div class="other-apps-grid">
       {otherApps.map((app, i) => (
         <div data-animate="fade-up" style={`--stagger-index: ${i}`}>
-          <Card variant="featured" href={`/${app.slug}`} tag="app">
+          <Card variant="featured" href={localizePath(`/${app.slug}`, lang)} tag="app">
             <div class="other-app-card">
-              <span class="other-app-card__icon" aria-hidden="true">{app.icon}</span>
+              <AppIcon src={app.iconUrl} alt={app.name} />
               <h3 class="other-app-card__title">{app.name}</h3>
-              <p class="other-app-card__subtitle">{app.tagline.es}</p>
+              <p class="other-app-card__subtitle">{app.tagline[lang]}</p>
             </div>
           </Card>
         </div>
@@ -137,7 +188,7 @@ const faq = sca.faq!.es.map(item => ({
 
   <!-- ==================== PRIVACY ==================== -->
   <div class="privacy-link">
-    <a href="/privacy/simple-crypto-alerts">Privacy Policy</a>
+    <a href={localizePath('/privacy/simple-crypto-alerts', lang)}>{ui.privacyLabel}</a>
   </div>
 
 </AppLandingLayout>
@@ -267,9 +318,10 @@ const faq = sca.faq!.es.map(item => ({
     gap: var(--space-sm);
   }
 
-  .other-app-card__icon {
-    font-size: 1.5rem;
+  .other-app-card :global(img) {
+    display: block;
     margin-bottom: var(--space-xs);
+    border-radius: var(--radius-sm);
   }
 
   .other-app-card__title {

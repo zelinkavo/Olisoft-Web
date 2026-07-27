@@ -33,9 +33,10 @@ export interface App {
     es: string;
     en: string;
   };
-  icon: string;
+  iconUrl: string;
   googlePlayUrl: string;
   technologies: string[];
+  tags: string[];
   color: string;
   features?: {
     es: Feature[];
@@ -60,9 +61,10 @@ export const apps: App[] = [
       es: 'Configura alertas en segundos y deja que la app supervise el mercado por ti. Notificaciones precisas en tiempo real, incluso con la app cerrada.',
       en: 'Set alerts in seconds and let the app monitor the market for you. Accurate real-time notifications, even when the app is closed.',
     },
-    icon: '\u26A1',
+    iconUrl: '/icon-scrypto-alerts.webp',
     googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.simplecryptoalerts.app',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API'],
+    tags: ['Criptomonedas', 'Alertas', 'Bitcoin', 'Precios'],
     color: '#d4a24e',
     features: {
       es: [
@@ -301,9 +303,10 @@ export const apps: App[] = [
       es: 'Escanea Wallapop en segundo plano, encuentra chollos antes que nadie y te notifica al instante.',
       en: 'Scan Wallapop in the background, find deals before anyone else, and get notified instantly.',
     },
-    icon: '\uD83C\uDFAF',
+    iconUrl: '/icon-wallapro.webp',
     googlePlayUrl: 'https://play.google.com/store/apps/details?id=com.wallapro.app',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Kotlin', 'SQLite'],
+    tags: ['Wallapop', 'Chollos', 'Segunda mano', 'Alertas'],
     color: '#5bb8a6',
     features: {
       es: [
@@ -311,64 +314,64 @@ export const apps: App[] = [
           icon: '\uD83D\uDD0D',
           title: { es: 'Escáner automático', en: 'Auto Scanner' },
           description: {
-            es: 'Escanea Wallapop en segundo plano con un servicio foreground nativo Android. Intervalos configurables de 60 min (free) a 5 min (Ultra), con jitter anti-detección.',
-            en: 'Scan Wallapop in the background with a native Android foreground service. Configurable intervals from 60 min (free) to 5 min (Ultra), with anti-detection jitter.',
+            es: 'Recibe alertas de nuevos anuncios en Wallapop al instante. La app escanea automáticamente en segundo plano, incluso con el móvil cerrado.',
+            en: 'Get instant alerts for new Wallapop listings. The app automatically scans in the background, even when your phone is locked.',
           },
         },
         {
           icon: '\u26A1',
           title: { es: 'Búsquedas inteligentes', en: 'Smart Searches' },
           description: {
-            es: 'Palabras clave, categorías, precio, filtros de texto, ubicación manual e importación directa de URLs de Wallapop.',
-            en: 'Keywords, categories, price range, text filters, manual location and direct Wallapop URL import.',
+            es: 'Crea búsquedas personalizadas por palabras clave, categoría y precio. Ideal para encontrar chollos en Wallapop sin perder tiempo.',
+            en: 'Create custom searches by keyword, category, and price. Perfect for finding great deals on Wallapop without wasting time.',
           },
         },
         {
           icon: '\uD83D\uDCF8',
           title: { es: 'Feed de capturas', en: 'Captures Feed' },
           description: {
-            es: 'Todas las capturas del escáner en un feed único con búsqueda en tiempo real, filtros por alerta, favoritos y archivados.',
-            en: 'All scanner captures in a single feed with real-time search, alert filters, favorites and archived items.',
+            es: 'Todas tus alertas Wallapop en un solo feed. Busca, filtra y guarda tus anuncios favoritos para no perder ningún chollo.',
+            en: 'All your Wallapop alerts in one feed. Search, filter, and save your favorite listings so you never miss a deal.',
           },
         },
         {
           icon: '\uD83D\uDCCA',
           title: { es: 'Watchlist de precios', en: 'Price Watchlist' },
           description: {
-            es: 'Sigue artículos específicos y recibe notificación cuando bajen de precio. Monitorización automática en cada ciclo de escaneo.',
-            en: 'Track specific items and get notified when prices drop. Automatic monitoring on every scan cycle.',
+            es: 'Sigue el precio de artículos de segunda mano y recibe una alerta cuando bajen. La forma más fácil de encontrar gangas en Wallapop.',
+            en: 'Track prices on second-hand items and get an alert when they drop. The easiest way to find bargains on Wallapop.',
           },
         },
         {
           icon: '\uD83D\uDD14',
           title: { es: 'Notificaciones avanzadas', en: 'Advanced Notifications' },
           description: {
-            es: '4 modos configurables: agrupar todo, separar, agrupar por búsqueda o silencioso. Rate limit anti-spam y sonidos personalizados.',
-            en: '4 configurable modes: group all, separate, group by search or silent. Anti-spam rate limiting and custom sounds.',
+            es: 'Configura cómo recibir tus alertas Wallapop: agrupadas, una a una o en silencio. Tú decides cuándo y cómo te avisamos.',
+            en: 'Choose how to receive your Wallapop alerts: grouped, one by one, or silently. You decide when and how we notify you.',
           },
         },
         {
           icon: '\u2B50',
           title: { es: 'Sistema de puntos', en: 'Points System' },
           description: {
-            es: 'Gana puntos viendo vídeos y desbloquea más búsquedas, capturas y watchlist. Gratis, sin límites ocultos.',
-            en: 'Earn points watching videos and unlock more searches, captures and watchlist. Free, no hidden limits.',
+            es: 'Usa WallaPro gratis y gana puntos viendo vídeos. Canjéalos por más búsquedas, capturas y watchlist sin pagar nada.',
+            en: 'Use WallaPro for free and earn points by watching videos. Redeem them for more searches, captures, and watchlists at no cost.',
           },
         },
         {
           icon: '\uD83D\uDC51',
           title: { es: 'Modo Ultra', en: 'Ultra Mode' },
           description: {
-            es: 'Pago único: 20 búsquedas, 500 capturas, intervalos de 5 min, filtros de texto, notificaciones avanzadas y sin anuncios.',
-            en: 'One-time payment: 20 searches, 500 captures, 5 min intervals, text filters, advanced notifications and no ads.',
+            es: 'Pago único sin suscripción: 20 búsquedas activas, escaneo cada 5 minutos, filtros avanzados y sin anuncios. La forma más potente de encontrar chollos.',
+            en: 'One-time payment with no subscription: 20 active searches, 5-minute scanning, advanced filters, and no ads. The most powerful way to find deals.',
           },
         },
         {
           icon: '\uD83D\uDEE1\uFE0F',
-          title: { es: 'Anti-detección', en: 'Anti-Detection' },
+          title: { es: 'Seguro y discreto', en: 'Safe & Discreet' },
           description: {
-            es: 'User-Agent dinámico, jitter en delays, rate limiting natural y sin scraping web. Todo vía API oficial.',
-            en: 'Dynamic User-Agent, delay jitter, natural rate limiting and no web scraping. All via official API.',
+            es: 'WallaPro está diseñado para ser seguro y respetar los términos de uso. Sin riesgos, solo alertas Wallapop rápidas y fiables.',
+            en: 'WallaPro is designed to be safe and respect terms of use. No risks, just fast and reliable Wallapop alerts.',
           },
         },
       ],
@@ -378,7 +381,7 @@ export const apps: App[] = [
           title: { es: 'Escáner automático', en: 'Auto Scanner' },
           description: {
             es: 'Escanea Wallapop en segundo plano con un servicio foreground nativo Android. Intervalos configurables de 60 min (free) a 5 min (Ultra), con jitter anti-detección.',
-            en: 'Scan Wallapop in the background with a native Android foreground service. Configurable intervals from 60 min (free) to 5 min (Ultra), with anti-detection jitter.',
+            en: 'Get instant alerts for new Wallapop listings. The app automatically scans in the background, even when your phone is locked.',
           },
         },
         {
@@ -386,7 +389,7 @@ export const apps: App[] = [
           title: { es: 'Búsquedas inteligentes', en: 'Smart Searches' },
           description: {
             es: 'Palabras clave, categorías, precio, filtros de texto, ubicación manual e importación directa de URLs de Wallapop.',
-            en: 'Keywords, categories, price range, text filters, manual location and direct Wallapop URL import.',
+            en: 'Create custom searches by keyword, category, and price. Perfect for finding great deals on Wallapop without wasting time.',
           },
         },
         {
@@ -394,7 +397,7 @@ export const apps: App[] = [
           title: { es: 'Feed de capturas', en: 'Captures Feed' },
           description: {
             es: 'Todas las capturas del escáner en un feed único con búsqueda en tiempo real, filtros por alerta, favoritos y archivados.',
-            en: 'All scanner captures in a single feed with real-time search, alert filters, favorites and archived items.',
+            en: 'All your Wallapop alerts in one feed. Search, filter, and save your favorite listings so you never miss a deal.',
           },
         },
         {
@@ -402,7 +405,7 @@ export const apps: App[] = [
           title: { es: 'Watchlist de precios', en: 'Price Watchlist' },
           description: {
             es: 'Sigue artículos específicos y recibe notificación cuando bajen de precio. Monitorización automática en cada ciclo de escaneo.',
-            en: 'Track specific items and get notified when prices drop. Automatic monitoring on every scan cycle.',
+            en: 'Track prices on second-hand items and get an alert when they drop. The easiest way to find bargains on Wallapop.',
           },
         },
         {
@@ -410,7 +413,7 @@ export const apps: App[] = [
           title: { es: 'Notificaciones avanzadas', en: 'Advanced Notifications' },
           description: {
             es: '4 modos configurables: agrupar todo, separar, agrupar por búsqueda o silencioso. Rate limit anti-spam y sonidos personalizados.',
-            en: '4 configurable modes: group all, separate, group by search or silent. Anti-spam rate limiting and custom sounds.',
+            en: 'Choose how to receive your Wallapop alerts: grouped, one by one, or silently. You decide when and how we notify you.',
           },
         },
         {
@@ -418,7 +421,7 @@ export const apps: App[] = [
           title: { es: 'Sistema de puntos', en: 'Points System' },
           description: {
             es: 'Gana puntos viendo vídeos y desbloquea más búsquedas, capturas y watchlist. Gratis, sin límites ocultos.',
-            en: 'Earn points watching videos and unlock more searches, captures and watchlist. Free, no hidden limits.',
+            en: 'Use WallaPro for free and earn points by watching videos. Redeem them for more searches, captures, and watchlists at no cost.',
           },
         },
         {
@@ -426,7 +429,7 @@ export const apps: App[] = [
           title: { es: 'Modo Ultra', en: 'Ultra Mode' },
           description: {
             es: 'Pago único: 20 búsquedas, 500 capturas, intervalos de 5 min, filtros de texto, notificaciones avanzadas y sin anuncios.',
-            en: 'One-time payment: 20 searches, 500 captures, 5 min intervals, text filters, advanced notifications and no ads.',
+            en: 'One-time payment with no subscription: 20 active searches, 5-minute scanning, advanced filters, and no ads. The most powerful way to find deals.',
           },
         },
         {
@@ -434,7 +437,7 @@ export const apps: App[] = [
           title: { es: 'Anti-detección', en: 'Anti-Detection' },
           description: {
             es: 'User-Agent dinámico, jitter en delays, rate limiting natural y sin scraping web. Todo vía API oficial.',
-            en: 'Dynamic User-Agent, delay jitter, natural rate limiting and no web scraping. All via official API.',
+            en: 'WallaPro is designed to be safe and respect terms of use. No risks, just fast and reliable Wallapop alerts.',
           },
         },
       ],

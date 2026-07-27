@@ -3,15 +3,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/ui/Card.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import HeroBlock from '../components/HeroBlock.astro';
+import AppIcon from '../components/AppIcon.astro';
+import { localizePath } from '../lib/i18n';
 import { apps } from '../data/apps';
+
+const lang: 'es' | 'en' = Astro.locals.lang;
+
+const ui = lang === 'es' ? {
+  title: 'OliSoft APPs — Aplicaciones móviles con ingeniería de precisión',
+  description: 'OliSoft APPs crea aplicaciones Android de alta calidad. Descubre Simple Crypto Alerts y WallaPro.',
+  sectionTitle: 'Apps',
+  sectionSubtitle: 'Nuestras aplicaciones',
+} : {
+  title: 'OliSoft APPs — Precision-engineered mobile applications',
+  description: 'OliSoft APPs creates high-quality Android applications. Discover Simple Crypto Alerts and WallaPro.',
+  sectionTitle: 'Apps',
+  sectionSubtitle: 'Our applications',
+};
 ---
 
 <BaseLayout
-  title="OliSoft APPs — Aplicaciones móviles con ingeniería de precisión"
-  description="OliSoft APPs crea aplicaciones Android de alta calidad. Descubre Simple Crypto Alerts y WallaPro."
+  title={ui.title}
+  description={ui.description}
+  lang={lang}
 >
   <section id="hero">
-    <HeroBlock lang="es" />
+    <HeroBlock lang={lang} />
   </section>
 
   <section id="apps" class="section--themed">
@@ -31,23 +48,23 @@ import { apps } from '../data/apps';
     <div class="section__content">
       <SectionHeader
         number="01."
-        title="Apps"
-        subtitle="Nuestras aplicaciones"
+        title={ui.sectionTitle}
+        subtitle={ui.sectionSubtitle}
       />
 
       <div class="apps-grid">
       {apps.map((app, i) => (
         <div data-animate="fade-up" style={`--stagger-index: ${i}`}>
-          <Card variant="featured" href={`/${app.slug}`} tag="app">
+          <Card variant="featured" href={localizePath(`/${app.slug}`, lang)} tag="app">
             <div class="app-card">
-              <span class="app-card__icon" aria-hidden="true">{app.icon}</span>
+              <AppIcon src={app.iconUrl} alt={app.name} />
               <h3 class="app-card__title">{app.name}</h3>
-              <p class="app-card__subtitle">{app.tagline.es}</p>
-              <div class="app-card__techs">
-                {app.technologies.slice(0, 4).map((tech, idx) => (
+              <p class="app-card__subtitle">{app.tagline[lang]}</p>
+              <div class="app-card__tags">
+                {app.tags.slice(0, 4).map((tag, idx) => (
                   <>
-                    <span class="app-card__tech">{tech}</span>
-                    {idx < Math.min(app.technologies.length, 4) - 1 && <span class="tech-sep">·</span>}
+                    <span class="app-card__tag">{tag}</span>
+                    {idx < Math.min(app.tags.length, 4) - 1 && <span class="tag-sep">·</span>}
                   </>
                 ))}
               </div>
@@ -236,9 +253,10 @@ import { apps } from '../data/apps';
     height: 100%;
   }
 
-  .app-card__icon {
-    font-size: 1.5rem;
+  .app-card :global(img) {
+    display: block;
     margin-bottom: var(--space-xs);
+    border-radius: var(--radius-sm);
   }
 
   .app-card__title {
@@ -255,7 +273,7 @@ import { apps } from '../data/apps';
     flex-grow: 1;
   }
 
-  .app-card__techs {
+  .app-card__tags {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -263,25 +281,21 @@ import { apps } from '../data/apps';
     margin-top: var(--space-sm);
   }
 
-  .app-card__tech {
+  .app-card__tag {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-text-muted);
+    color: var(--color-accent-primary);
     letter-spacing: 0.02em;
     transition: color var(--transition-fast);
   }
 
-  .tech-sep {
+  .tag-sep {
     color: rgba(255, 255, 255, 0.15);
     font-size: 0.8rem;
   }
 
   :global(.card:hover) .app-card__title {
     color: var(--color-accent-primary);
-  }
-
-  :global(.card:hover) .app-card__tech {
-    color: var(--color-text-secondary);
   }
 
   .section__content {

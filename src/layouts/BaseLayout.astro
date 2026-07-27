@@ -21,6 +21,7 @@ interface Props {
   ogImage?: string;
   includeNav?: boolean;
   includeFooter?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -30,6 +31,7 @@ const {
   ogImage = '/og-default.png',
   includeNav = true,
   includeFooter = true,
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -47,6 +49,7 @@ const websiteJsonLd = generateWebsiteJsonLd(Astro.site);
     <!-- SEO Primary -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->

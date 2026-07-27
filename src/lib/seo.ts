@@ -17,7 +17,7 @@ export interface SEOProps {
 /**
  * Generate JSON-LD structured data for OliSoft APPs
  */
-export function generateOrganizationJsonLd(lang: 'es' | 'en' = 'es') {
+export function generateOrganizationJsonLd(siteUrl: string | URL, lang: 'es' | 'en' = 'es') {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -26,7 +26,7 @@ export function generateOrganizationJsonLd(lang: 'es' | 'en' = 'es') {
       lang === 'es'
         ? 'Creadores de aplicaciones móviles con ingeniería de precisión'
         : 'Creators of precision-engineered mobile applications',
-    url: 'https://olisoft-apps.pages.dev',
+    url: siteUrl,
     brand: {
       '@type': 'Brand',
       name: 'OliSoft',
@@ -37,12 +37,12 @@ export function generateOrganizationJsonLd(lang: 'es' | 'en' = 'es') {
 /**
  * Generate JSON-LD structured data for the website
  */
-export function generateWebsiteJsonLd() {
+export function generateWebsiteJsonLd(siteUrl: string | URL) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'OliSoft APPs',
-    url: 'https://olisoft-apps.pages.dev',
+    url: siteUrl,
     inLanguage: ['es', 'en'],
   };
 }

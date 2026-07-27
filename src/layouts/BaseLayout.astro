@@ -37,6 +37,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const basePath = Astro.url.pathname.replace(/^\/en/, '') || '/';
 const personJsonLd = generateOrganizationJsonLd(Astro.site, lang);
 const websiteJsonLd = generateWebsiteJsonLd(Astro.site);
 ---
@@ -55,9 +56,9 @@ const websiteJsonLd = generateWebsiteJsonLd(Astro.site);
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Hreflang -->
-    <link rel="alternate" hreflang="es" href={new URL(Astro.url.pathname, Astro.site)} />
-    <link rel="alternate" hreflang="en" href={new URL(`/en${Astro.url.pathname}`, Astro.site)} />
-    <link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" hreflang="es" href={new URL(basePath, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(`/en${basePath}`, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(basePath, Astro.site)} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

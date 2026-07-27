@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import HeroBlock from '../HeroBlock.astro';
+import AppIcon from '../AppIcon.astro';
+import { localizePath } from '../../lib/i18n';
+import { apps } from '../../data/apps';
+
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const ui = lang === 'es' ? {
+  title: 'OliSoft APPs — Aplicaciones móviles con ingeniería de precisión',
+  description: 'OliSoft APPs crea aplicaciones Android de alta calidad. Descubre Simple Crypto Alerts y WallaPro.',
+  sectionTitle: 'Apps',
+  sectionSubtitle: 'Nuestras aplicaciones',
+} : {
+  title: 'OliSoft APPs — Precision-engineered mobile applications',
+  description: 'OliSoft APPs creates high-quality Android applications. Discover Simple Crypto Alerts and WallaPro.',
+  sectionTitle: 'Apps',
+  sectionSubtitle: 'Our applications',
+};
+---
+
+<BaseLayout
+  title={ui.title}
+  description={ui.description}
+  lang={lang}
+>
+  <section id="hero">
+    <HeroBlock lang={lang} />
+  </section>
+
+  <section id="apps" class="section--themed">
+    <div class="section__bg section__bg--apps" aria-hidden="true">
+      <div class="section__grid"></div>
+      <div class="section__orb section__orb--gold-right"></div>
+      <div class="section__orb section__orb--gold-left"></div>
+      <div class="mote mote--gold" style="top:15%;left:12%;--mote-dur:18s;--mote-dx:20px;--mote-dy:-15px"></div>
+      <div class="mote mote--gold" style="top:55%;right:18%;--mote-dur:22s;--mote-dx:-12px;--mote-dy:18px;animation-delay:-5s"></div>
+      <div class="mote mote--gold" style="top:75%;left:40%;--mote-dur:16s;--mote-dx:15px;--mote-dy:-10px;animation-delay:-8s"></div>
+      <div class="mote mote--gold mote--lg" style="top:30%;right:35%;--mote-dur:24s;--mote-dx:-8px;--mote-dy:12px;animation-delay:-12s"></div>
+      <div class="mote mote--gold" style="top:45%;left:65%;--mote-dur:20s;--mote-dx:-18px;--mote-dy:-12px;animation-delay:-3s"></div>
+      <div class="comet comet--gold" style="top:35%;left:5%;--comet-dur:16s;--comet-tx:250px;--comet-ty:-20px;--comet-angle:-5deg"></div>
+      <div class="comet comet--gold comet--reverse" style="top:65%;right:8%;--comet-dur:20s;--comet-tx:-220px;--comet-ty:-35px;--comet-angle:8deg;animation-delay:-10s"></div>
+    </div>
+
+    <div class="section__content">
+      <SectionHeader
+        number="01."
+        title={ui.sectionTitle}
+        subtitle={ui.sectionSubtitle}
+      />
+
+      <div class="apps-grid">
+      {apps.map((app, i) => (
+        <div data-animate="fade-up" style={`--stagger-index: ${i}`}>
+          <Card variant="featured" href={localizePath(`/${app.slug}`, lang)} tag="app">
+            <div class="app-card">
+              <AppIcon src={app.iconUrl} alt={app.name} />
+              <h3 class="app-card__title">{app.name}</h3>
+              <p class="app-card__subtitle">{app.tagline[lang]}</p>
+              <div class="app-card__tags">
+                {app.tags.slice(0, 4).map((tag, idx) => (
+                  <>
+                    <span class="app-card__tag">{tag}</span>
+                    {idx < Math.min(app.tags.length, 4) - 1 && <span class="tag-sep">·</span>}
+                  </>
+                ))}
+              </div>
+            </div>
+          </Card>
+        </div>
+      ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    position: relative;
+  }
+
+  section#hero {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  section:not(#hero)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 1px;
+    background: linear-gradient(
+      90deg, transparent 5%,
+      rgba(212, 162, 78, 0.12) 30%,
+      rgba(124, 149, 196, 0.10) 70%,
+      transparent 95%
+    );
+  }
+
+  .section__bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .section__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(212, 162, 78, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 162, 78, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 15%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 15%, transparent 70%);
+  }
+
+  .section__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+  }
+
+  .section__orb--gold-right {
+    width: 600px;
+    height: 500px;
+    top: 10%;
+    right: 0%;
+    background: rgba(212, 162, 78, 0.07);
+    animation: sectionOrbFloat 16s ease-in-out infinite;
+  }
+
+  .section__orb--gold-left {
+    width: 450px;
+    height: 400px;
+    bottom: 10%;
+    left: 5%;
+    background: rgba(212, 162, 78, 0.05);
+    animation: sectionOrbFloat 20s ease-in-out infinite 8s;
+  }
+
+  @keyframes sectionOrbFloat {
+    0%   { transform: translate(0, 0); opacity: 1; }
+    33%  { transform: translate(15px, -20px); opacity: 0.65; }
+    66%  { transform: translate(-12px, -8px); opacity: 0.8; }
+    100% { transform: translate(0, 0); opacity: 1; }
+  }
+
+  .mote {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    animation: moteDrift var(--mote-dur, 20s) ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .mote--lg { width: 5px; height: 5px; }
+  .mote--gold { background: rgba(212, 162, 78, 0.5); box-shadow: 0 0 12px rgba(212, 162, 78, 0.25); }
+
+  @keyframes moteDrift {
+    0%   { transform: translate(0, 0); opacity: 0.5; }
+    25%  { transform: translate(var(--mote-dx, 10px), var(--mote-dy, -10px)); opacity: 1; }
+    50%  { transform: translate(calc(var(--mote-dx, 10px) * -0.5), calc(var(--mote-dy, -10px) * 0.7)); opacity: 0.6; }
+    75%  { transform: translate(calc(var(--mote-dx, 10px) * 0.3), calc(var(--mote-dy, -10px) * -0.4)); opacity: 1; }
+    100% { transform: translate(0, 0); opacity: 0.5; }
+  }
+
+  .comet {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: cometCross var(--comet-dur, 18s) linear infinite;
+    opacity: 0;
+  }
+
+  .comet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 35px;
+    height: 2px;
+    transform: translateY(-50%) rotate(var(--comet-angle, 0deg));
+    transform-origin: right center;
+    border-radius: 2px;
+  }
+
+  .comet--reverse::after {
+    right: auto;
+    left: 100%;
+    transform-origin: left center;
+  }
+
+  .comet--gold { background: rgba(212, 162, 78, 0.6); box-shadow: 0 0 8px rgba(212, 162, 78, 0.3); }
+  .comet--gold::after { background: linear-gradient(90deg, transparent, rgba(212, 162, 78, 0.35)); }
+  .comet--reverse.comet--gold::after { background: linear-gradient(90deg, rgba(212, 162, 78, 0.35), transparent); }
+
+  @keyframes cometCross {
+    0%   { transform: translate(0, 0); opacity: 0; }
+    5%   { opacity: 0.7; }
+    45%  { opacity: 0.5; }
+    50%  { transform: translate(var(--comet-tx, 200px), var(--comet-ty, -30px)); opacity: 0.7; }
+    95%  { opacity: 0.5; }
+    98%  { opacity: 0; }
+    100% { transform: translate(calc(var(--comet-tx, 200px) * 2), calc(var(--comet-ty, -30px) * 2)); opacity: 0; }
+  }
+
+  .section--themed > :not(.section__bg) { position: relative; z-index: 1; }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .app-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    height: 100%;
+  }
+
+  .app-card :global(img) {
+    display: block;
+    margin-bottom: var(--space-xs);
+    border-radius: var(--radius-sm);
+  }
+
+  .app-card__title {
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .app-card__subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .app-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+  }
+
+  .app-card__tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent-primary);
+    letter-spacing: 0.02em;
+    transition: color var(--transition-fast);
+  }
+
+  .tag-sep {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 0.8rem;
+  }
+
+  :global(.card:hover) .app-card__title {
+    color: var(--color-accent-primary);
+  }
+
+  .section__content {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+  }
+
+  @media (max-width: 640px) {
+    .section__content { padding: 0 var(--space-md); }
+    .apps-grid { grid-template-columns: 1fr; }
+    .section__orb, .comet { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section__orb, .mote, .comet { animation: none !important; }
+  }
+</style>

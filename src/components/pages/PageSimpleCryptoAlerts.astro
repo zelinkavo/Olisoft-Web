@@ -1,0 +1,243 @@
+---
+import AppLandingLayout from '../../layouts/AppLandingLayout.astro';
+import AppIcon from '../AppIcon.astro';
+import FAQ from '../FAQ.astro';
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import { generateSoftwareAppJsonLd } from '../../lib/seo';
+import { localizePath } from '../../lib/i18n';
+import { apps } from '../../data/apps';
+
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const sca = apps.find(a => a.id === 'simple-crypto-alerts')!;
+const otherApps = apps.filter(a => a.id !== 'simple-crypto-alerts');
+const features = sca.features![lang];
+const faq = sca.faq![lang].map(item => ({
+  question: item.question[lang],
+  answer: item.answer[lang],
+}));
+const softwareJsonLd = generateSoftwareAppJsonLd(
+  Astro.site,
+  sca.name,
+  sca.description[lang],
+  sca.iconUrl,
+  sca.googlePlayUrl,
+);
+
+const ui = lang === 'es' ? {
+  sectionFeatures: 'Funcionalidades',
+  featuresSubtitle: 'Todo lo que necesitas para seguir tus criptomonedas',
+  sectionCompare: 'Gratis vs Pro',
+  compareSubtitle: 'Compara los planes',
+  compareFeature: 'Característica',
+  compareMonitor: 'Crypto Live Monitor',
+  compareAlerts: 'Alertas activas',
+  compareNotifs: 'Notificaciones push',
+  compareSound: 'Super Sound Alert',
+  compareFavs: 'Favoritos',
+  compareMode: 'Modo día/noche',
+  comparePerf: 'Rendimiento optimizado',
+  sectionFaq: 'Preguntas frecuentes',
+  faqSubtitle: 'Resolvemos tus dudas',
+  sectionOther: 'Otras apps',
+  otherSubtitle: 'Descubre nuestras otras aplicaciones',
+  privacyLabel: 'Política de privacidad',
+} : {
+  sectionFeatures: 'Features',
+  featuresSubtitle: 'Everything you need to track your crypto',
+  sectionCompare: 'Free vs Pro',
+  compareSubtitle: 'Compare plans',
+  compareFeature: 'Feature',
+  compareMonitor: 'Crypto Live Monitor',
+  compareAlerts: 'Active alerts',
+  compareNotifs: 'Push notifications',
+  compareSound: 'Super Sound Alert',
+  compareFavs: 'Favorites',
+  compareMode: 'Day/night mode',
+  comparePerf: 'Optimized performance',
+  sectionFaq: 'FAQ',
+  faqSubtitle: "We've got answers",
+  sectionOther: 'Other apps',
+  otherSubtitle: 'Check out our other apps',
+  privacyLabel: 'Privacy Policy',
+};
+---
+
+<AppLandingLayout
+  title={lang === 'es' ? 'Simple Crypto Alerts - Alertas de Precio Cripto' : 'Simple Crypto Alerts - Crypto Price Alerts'}
+  description={lang === 'es' ? 'Alertas de precio cripto en tiempo real. Configura alertas Bitcoin, Ethereum y más en segundos. Monitorización 24/7 gratis.' : 'Real-time crypto price alerts. Set Bitcoin, Ethereum and more alerts in seconds. Free 24/7 monitoring.'}
+  color="gold"
+  lang={lang}
+  technologies={['React Native', 'Expo', 'TypeScript', 'Zustand', 'CoinGecko API']}
+  googlePlayUrl={sca.googlePlayUrl}
+  extraJsonLd={[softwareJsonLd]}
+>
+
+  <section class="features-section">
+    <SectionHeader
+      number="01."
+      title={ui.sectionFeatures}
+      subtitle={ui.featuresSubtitle}
+    />
+
+    <div class="features-grid">
+      {features.map((feature, i) => (
+        <div class="feature-card" data-animate="fade-up" style={`--stagger-index: ${i}`}>
+          <span class="feature-card__icon" aria-hidden="true">{feature.icon}</span>
+          <h3 class="feature-card__title">{feature.title[lang]}</h3>
+          <p class="feature-card__desc">{feature.description[lang]}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="comparison-section">
+    <SectionHeader
+      number="02."
+      title={ui.sectionCompare}
+      subtitle={ui.compareSubtitle}
+    />
+
+    <div class="comparison-table" data-animate="fade-up">
+      <table>
+        <thead>
+          <tr>
+            <th>{ui.compareFeature}</th>
+            <th class="col-free">{lang === 'es' ? 'Gratis' : 'Free'}</th>
+            <th class="col-pro">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>{ui.compareMonitor}</td><td class="col-free">{lang === 'es' ? 'Normal' : 'Standard'}</td><td class="col-pro">{lang === 'es' ? 'ULTRA en tiempo real' : 'Real-time ULTRA'}</td></tr>
+          <tr><td>{ui.compareAlerts}</td><td class="col-free">—</td><td class="col-pro">{lang === 'es' ? 'Hasta 20' : 'Up to 20'}</td></tr>
+          <tr><td>{ui.compareNotifs}</td><td class="col-free">✓</td><td class="col-pro">{lang === 'es' ? '✓ + Prioridad' : '✓ + Priority'}</td></tr>
+          <tr><td>{ui.compareSound}</td><td class="col-free">✗</td><td class="col-pro">✓</td></tr>
+          <tr><td>{ui.compareFavs}</td><td class="col-free">✓</td><td class="col-pro">✓</td></tr>
+          <tr><td>{ui.compareMode}</td><td class="col-free">✓</td><td class="col-pro">✓</td></tr>
+          <tr><td>{ui.comparePerf}</td><td class="col-free">✗</td><td class="col-pro">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <SectionHeader
+      number="03."
+      title={ui.sectionFaq}
+      subtitle={ui.faqSubtitle}
+    />
+
+    <div data-animate="fade-up">
+      <FAQ items={faq} />
+    </div>
+  </section>
+
+  <section class="other-apps-section">
+    <SectionHeader
+      number="04."
+      title={ui.sectionOther}
+      subtitle={ui.otherSubtitle}
+    />
+
+    <div class="other-apps-grid">
+      {otherApps.map((app, i) => (
+        <div data-animate="fade-up" style={`--stagger-index: ${i}`}>
+          <Card variant="featured" href={localizePath(`/${app.slug}`, lang)} tag="app">
+            <div class="other-app-card">
+              <AppIcon src={app.iconUrl} alt={app.name} />
+              <h3 class="other-app-card__title">{app.name}</h3>
+              <p class="other-app-card__subtitle">{app.tagline[lang]}</p>
+            </div>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="privacy-link">
+    <a href={localizePath('/privacy/simple-crypto-alerts', lang)}>{ui.privacyLabel}</a>
+  </div>
+
+</AppLandingLayout>
+
+<style>
+  section { padding-top: var(--section-padding); padding-bottom: var(--section-padding); position: relative; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+
+  .feature-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .feature-card:hover { border-color: var(--color-border-accent); transform: translateY(-2px); }
+  .feature-card__icon { font-size: 1.5rem; display: block; margin-bottom: var(--space-sm); }
+  .feature-card__title { font-size: 1rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--space-xs); }
+  .feature-card__desc { font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0; }
+
+  .comparison-table { overflow-x: auto; }
+
+  .comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .comparison-table th, .comparison-table td {
+    padding: var(--space-md) var(--space-lg);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .comparison-table th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .comparison-table td { font-size: 0.9rem; color: var(--color-text-secondary); }
+  .comparison-table td:first-child { font-weight: 500; color: var(--color-text-primary); }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table .col-free { color: var(--color-text-muted); text-align: center; }
+  .comparison-table .col-pro { color: var(--color-accent-primary); font-weight: 600; text-align: center; }
+  .comparison-table th.col-free, .comparison-table th.col-pro { text-align: center; }
+
+  .faq-section { max-width: 700px; }
+
+  .other-apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-xl); }
+  .other-app-card { display: flex; flex-direction: column; gap: var(--space-sm); }
+  .other-app-card :global(img) { display: block; margin-bottom: var(--space-xs); border-radius: var(--radius-sm); }
+  .other-app-card__title { font-size: 1.2rem; font-weight: 600; color: var(--color-text-primary); transition: color var(--transition-fast); }
+  .other-app-card__subtitle { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0; }
+  :global(.card:hover) .other-app-card__title { color: var(--color-accent-primary); }
+
+  .privacy-link { text-align: center; padding: var(--space-2xl) 0; }
+  .privacy-link a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+  }
+  .privacy-link a:hover { color: var(--color-text-secondary); }
+
+  @media (max-width: 640px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .comparison-table th, .comparison-table td { padding: var(--space-sm) var(--space-md); font-size: 0.8rem; }
+    .other-apps-grid { grid-template-columns: 1fr; }
+  }
+</style>

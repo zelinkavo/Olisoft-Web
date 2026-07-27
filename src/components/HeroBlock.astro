@@ -15,6 +15,7 @@ interface Props {
 }
 
 const { lang = 'es' } = Astro.props;
+import { localizePath } from '../lib/i18n';
 ---
 
 <div class="hero" id="hero-parallax">
@@ -58,8 +59,8 @@ const { lang = 'es' } = Astro.props;
           <span class="tagline-bracket" aria-hidden="true">[</span>
           <p class="hero__tagline">
             {lang === 'es'
-              ? 'Aplicaciones móviles con ingeniería de precisión'
-              : 'Precision-engineered mobile apps'}
+              ? <><a href={localizePath('/#apps', lang)} class="tagline-link">Aplicaciones</a> móviles con ingeniería de precisión</>
+              : <>Precision-engineered mobile <a href={localizePath('/#apps', lang)} class="tagline-link">apps</a></>}
           </p>
           <span class="tagline-bracket" aria-hidden="true">]</span>
         </div>
@@ -478,6 +479,7 @@ const { lang = 'es' } = Astro.props;
     text-align: center;
   }
 
+
   .hero__tagline-wrapper {
     display: inline-flex;
     align-items: center;
@@ -502,6 +504,16 @@ const { lang = 'es' } = Astro.props;
     color: var(--color-text-muted);
     letter-spacing: 0.02em;
     font-weight: 300;
+  }
+
+  .tagline-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .tagline-link:hover {
+    opacity: 0.7;
   }
 
   @media (max-width: 640px) {
